@@ -1,0 +1,89 @@
+.filepicker *,
+.filepicker *::before,
+.filepicker *::after {
+    box-sizing: inherit;
+}
+
+.filepicker {
+    box-sizing: border-box;
+    color: #555;
+    border: 1px solid #ccc;
+    margin-bottom: 9px;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 4px 6px;
+}
+
+.filepicker-top {
+    padding: 3px 0;
+    border-bottom: 1px solid gray;
+    display: flex;
+}
+
+.filepicker-bottom {
+    padding: 3px 0;
+    border-top: 1px solid gray;
+}
+
+.filepicker-entries {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: auto scroll;
+}
+
+.path-segment {
+    cursor: pointer;
+}
+
+.entry.selected {
+    color: blue;
+}
+
+.entry .icon {
+    line-height: 1.2;
+    padding-right: 1.5em;
+    margin: 0.25em;
+    background-position: top 1px right 4px;
+    background-size: 1em 1em;
+}
+
+.entry.file .icon {
+    color: black;
+    background: no-repeat url(/plugins/fields/filepicker/media/icons/file-regular.svg);
+}
+
+.entry.folder .icon {
+    background: no-repeat url(/plugins/fields/filepicker/media/icons/folder-solid.svg);
+    cursor: pointer;
+}
+
+.entry.folder .icon:hover {
+    background: no-repeat url(/plugins/fields/filepicker/media/icons/folder-open-solid.svg);
+}
+
+.entry.folder.exit .icon {
+    background: no-repeat url(/plugins/fields/filepicker/media/icons/level-up-alt.svg);
+    cursor: pointer;
+}
+
+/*.folder {*/
+/*    padding: 0 .3em;*/
+/*    position: relative;*/
+/*}*/
+
+/*.folder::before {*/
+/*    display: block;*/
+/*    content: '[';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/
+
+/*.folder::after {*/
+/*    display: block;*/
+/*    content: ']';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*}*/

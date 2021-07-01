@@ -1,0 +1,5 @@
+.idea
+vendor
+tmp
+*.min.js
+*.min.css
