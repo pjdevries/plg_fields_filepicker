@@ -50,7 +50,7 @@ class PlgFieldsFilepicker extends \FieldsPlugin
 		$fieldNode->setAttribute('include', $field->fieldparams->get('include', ''));
 		$fieldNode->setAttribute('exclude', $field->fieldparams->get('exclude', ''));
 		$fieldNode->setAttribute('ignore', $field->fieldparams->get('ignore', ''));
-		$fieldNode->setAttribute('display_height', $field->fieldparams->get('displayHeight', '300'));
+		$fieldNode->setAttribute('display_height', $field->fieldparams->get('displayHeight', '300px'));
 
 		return $fieldNode;
 	}

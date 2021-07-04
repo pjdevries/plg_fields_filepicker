@@ -42,7 +42,7 @@
                        multiple="false"
                        exclude=""
                        ignore=""
-                       display_height="300"
+                       display_height="300px"
                 />
 
                 <field name="mode"
@@ -79,7 +79,7 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-<!--
+
                 <field name="multiple"
                        type="radio"
                        label="PLG_FIELDS_FILEPICKER_MULTIPLE_LABEL"
@@ -91,7 +91,7 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
--->
+
                 <field name="exclude"
                        type="text"
                        label="PLG_FIELDS_FILEPICKER_EXCLUDE_LABEL"
@@ -115,7 +115,7 @@
                        type="text"
                        label="PLG_FIELDS_FILEPICKER_DISPLAY_HEIGHT_LABEL"
                        description="PLG_FIELDS_FILEPICKER_DISPLAY_HEIGHT_DESC"
-                       default="300"
+                       default="300px"
                 />
             </fieldset>
         </fields>

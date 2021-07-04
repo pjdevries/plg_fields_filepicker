@@ -64,7 +64,7 @@ $doc->addScriptOptions(
     </div>
 
     <div class="filepicker-entries"
-         style="height: <?= $displayData['displayHeight'] ?>px;">
+         style="height: <?= $displayData['displayHeight'] ?>;">
         <template x-if="!isBase()">
             <div class="entry folder exit">
                 <span class="icon" @click="exitFolder()"></span>

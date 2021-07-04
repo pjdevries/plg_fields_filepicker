@@ -108,7 +108,7 @@ class JFormFieldFilePicker extends JFormField
 
 	protected $secure;
 
-	protected $displayHeight = 300;
+	protected $displayHeight = '300px';
 
 	public function __construct($form = null)
 	{
@@ -132,7 +132,7 @@ class JFormFieldFilePicker extends JFormField
 	{
 		$displayData = [
 			'id'            => $this->fieldname,
-			'displayHeight' => $this->displayHeight,
+			'displayHeight' => $this->displayHeight ?: "300px",
 			'config'        => [
 				'name'       => $this->fieldname,
 				'group'      => $this->group,
@@ -322,7 +322,7 @@ class JFormFieldFilePicker extends JFormField
 			$this->recursive     = $this->parBool('recursive', 'recursive');
 			$this->multiple      = $this->parBool('multiple', 'multiple');
 			$this->secure        = $this->parBool('secure', 'secure');
-			$this->displayHeight = (int) $this->element['display_height'];
+			$this->displayHeight = $this->element['display_height'] ?: '300px';
 		}
 
 		return $return;
