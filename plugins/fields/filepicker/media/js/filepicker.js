@@ -31,26 +31,21 @@ Obix.text = Obix.text || {
         constructor(type, path = '', ...more) {
             this.type = type;
             this._path = new Path(path);
+            this.selected = false;
 
             Object.assign(this, more);
         }
 
-        static fromResponseData(entryData, selected) {
+        static fromResponseData(entryData) {
             const entry = entryData.type === 'file'
                 ? new File(entryData.path, entryData)
                 : new Folder(entryData.path, entryData);
-
-            entry.selected = selected.indexOf(entry.path) > -1;
 
             return entry;
         }
 
         get path() {
             return this._path.path;
-        }
-
-        pathSegments() {
-            return this._path.segments();
         }
 
         get name() {
@@ -63,6 +58,14 @@ Obix.text = Obix.text || {
 
         get dirname() {
             return this._path.dirname;
+        }
+
+        toggleSelect() {
+            this.selected = !this.selected;
+        }
+
+        pathSegments() {
+            return this._path.segments();
         }
     }
 
@@ -90,12 +93,14 @@ Obix.text = Obix.text || {
             Object.assign(this, more);
         }
 
-        select(path) {
-            this.entries.forEach(entry => entry.selected = entry.path === path ? !entry.selected : false);
+        unselect(path) {
+            const entry = this.entries.find(entry => entry.path === path);
+
+            if (entry !== undefined) {
+                entry.selected = false;
+            }
         }
     }
-
-
 
     O.filepicker = function (config) {
         const fetchEntries = async function (uri, folderPath) {
@@ -122,45 +127,95 @@ Obix.text = Obix.text || {
                 throw new Error(O.text._('PLG_FIELDS_FILEPICKER_AJAX_ERROR'));
             }
 
-            return response.json();
+            const responseData = await response.json();
+
+            if (!responseData.success) {
+                throw new Error(O.text._(response.message));
+            }
+
+            return responseData;
         };
 
         return {
+            config: config,
             folder: new Folder(config.baseDir),
-            selected: [],
+            selectedPaths: [],
             async init() {
-                const baseDir = config.selected.length > 0
-                    ? (new Path(config.selected[0])).dirname
-                    : config.baseDir
-                this.selected = config.selected;
-                this.folder = await this.load(baseDir);
+                this.selectedPaths = config.selected;
+                this.folder = await this.load(config.baseDir);
             },
             isBase() {
                 return this.folder.path === config.baseDir;
             },
-            async enterFolder(path) {
-                this.folder = await this.load(path);
+            async enterFolder(entry) {
+                this.folder = await this.load(entry.path);
             },
             async exitFolder() {
                 this.folder = await this.load(this.folder.dirname);
             },
-            async goToFolder(index) {
-                const path = '/' + this.folder.pathSegments().slice(0, index + 1).join('/');
+            async goToFolder(folderPathSegmentIndex) {
+                const path = '/' + this.folder.pathSegments().slice(0, folderPathSegmentIndex + 1).join('/');
 
                 this.folder = await this.load(path);
             },
-            select(path) {
-                this.folder.select(path);
-                this.selected[0] = this.selected[0] === path ? '' : path;
+            toggleSelect(entry) {
+                entry.toggleSelect();
+
+                // Single select: unselect currently selected entry.
+                if (!config.multiple) {
+                    this.folder.unselect(this.selectedPaths[0]);
+                }
+
+                const toggledEntryIndex = this.selectedPaths.indexOf(entry.path);
+
+                // Single select && toggled entry is now unselected.
+                if (!config.multiple && !entry.selected) {
+                    // Clear selected paths.
+                    this.selectedPaths = [];
+                    return;
+                }
+
+                // Single select && toggled entry is now selected.
+                if (!config.multiple && entry.selected) {
+                    // Replace existing path (if any) with toggled entry path.
+                    this.selectedPaths[0] = entry.path;
+                    return;
+                }
+
+                // Multi select && toggled entry is now unselected && toggled entry path exists in selected paths
+                if (!entry.selected && toggledEntryIndex > -1) {
+                    // Remove toggled entry path from selected paths.
+                    this.selectedPaths.splice(toggledEntryIndex, 1);
+                    return;
+                }
+
+                // Multi select && toggled entry is now selected && toggled entry path does not exist in selected paths.
+                if (entry.selected && toggledEntryIndex === -1) {
+                    // Add toggled entry path to selected paths.
+                    this.selectedPaths.splice(toggledEntryIndex, 1, entry.path);
+                }
+
+                // Multi select && (
+                //  (toggled entry unselected && toggled entry path does not exist in selected paths)
+                //  || (toggled entry selected && toggled entry path exists in selected paths))
+
+                // Nothing to do.
+            },
+            async goToSelected(selectedPathIndex) {
+                const path = (new Path(this.selectedPaths[selectedPathIndex])).dirname;
+
+                this.folder = await this.load(path);
             },
             async load(path) {
                 let response = await fetchEntries(config.fetchUri, path);
 
-                if (!response.success) {
-                    throw new Error(O.text._(response.message));
-                }
+                const entries = response.data[0].entries.map(entryData => {
+                    const entry = Entry.fromResponseData(entryData);
 
-                const entries = response.data[0].entries.map(entryData => Entry.fromResponseData(entryData, this.selected));
+                    entry.selected = this.selectedPaths.indexOf(entry.path) > -1;
+
+                    return entry;
+                });
 
                 return new Folder(path, entries);
             }

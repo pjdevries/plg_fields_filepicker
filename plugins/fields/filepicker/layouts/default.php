@@ -77,16 +77,17 @@ $doc->addScriptOptions(
                     <div class="entry file" :class="{selected: entry.selected}">
                         <span class="icon"></span><span
                                 x-text="entry.name"
-                                @click="select(entry.path)"></span>
+                                @click="toggleSelect(entry)"></span>
                     </div>
                 </template>
 
                 <template x-if="entry.type === 'folder'">
-                    <div class="entry folder" :class="{selected: entry.selected}">
+                    <div class="entry folder"
+                         :class="{selected: entry.selected}">
                         <span class="icon"
-                              @click="enterFolder(entry.path)"></span><span
+                              @click="enterFolder(entry)"></span><span
                                 x-text="entry.name"
-                                @click="select(entry.path)"></span>
+                                @click="toggleSelect(entry)"></span>
                     </div>
                 </template>
             </div>
@@ -94,11 +95,15 @@ $doc->addScriptOptions(
     </div>
 
     <div class="filepicker-bottom">
-        <span><?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span><span
-                x-text="selected.length > 0 ? selected[0] : ''"></span>
+        <span><?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span>
+        <template x-if="!config.multiple">
+        <span
+                x-text="selectedPaths.length > 0 ? selectedPaths[0] : ''"
+                @click="goToSelected(0)"></span>
+        </template>
     </div>
 
-    <input type="hidden" name="jform[params][<?= $id ?>]" :value="selected">
+    <input type="hidden" name="jform[params][<?= $id ?>]" :value="selectedPaths">
     <input type="hidden" name="<?= $config['token'] ?>" value="1">
 </div>
 
