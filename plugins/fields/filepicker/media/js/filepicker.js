@@ -159,6 +159,12 @@ Obix.text = Obix.text || {
                 this.folder = await this.load(path);
             },
             toggleSelect(entry) {
+                if (!(config.mode === 'all'
+                    || (config.mode === 'files' && entry.type === 'file')
+                    || (config.mode === 'folders' && entry.type === 'folder'))) {
+                    return;
+                }
+
                 entry.toggleSelect();
 
                 // Single select: unselect currently selected entry.

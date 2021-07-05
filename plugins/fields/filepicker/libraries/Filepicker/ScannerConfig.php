@@ -15,15 +15,22 @@ use Joomla\Input\Input;
 
 class ScannerConfig implements \JsonSerializable
 {
+
+	const MODE_ALL = 'all';
+
 	const MODE_FILES = 'files';
+
 	const MODE_FOLDERS = 'folders';
 
-	private static $modes = [
-		'1'       => self::MODE_FILES,
-		'files'   => self::MODE_FILES,
-		'2'       => self::MODE_FOLDERS,
-		'folders' => self::MODE_FOLDERS
-	];
+	private static $modes
+		= [
+			'0'       => self::MODE_ALL,
+			'all'     => self::MODE_ALL,
+			'1'       => self::MODE_FILES,
+			'files'   => self::MODE_FILES,
+			'2'       => self::MODE_FOLDERS,
+			'folders' => self::MODE_FOLDERS,
+		];
 
 	/**
 	 * Inclusion filter.
@@ -42,14 +49,15 @@ class ScannerConfig implements \JsonSerializable
 	protected $exclude = '';
 
 
-	protected $ignore = [
-		'CVS',
-		'.svn',
-		'.git',
-		'.idea',
-		'.DS_Store',
-		'__MACOSX'
-	];
+	protected $ignore
+		= [
+			'CVS',
+			'.svn',
+			'.git',
+			'.idea',
+			'.DS_Store',
+			'__MACOSX',
+		];
 
 	/**
 	 * The recursive.
@@ -82,7 +90,7 @@ class ScannerConfig implements \JsonSerializable
 				$directory = Helper::fullPath($value);
 				$this->setDirectory($directory);
 			},
-			'secure'    => function (string $value) {
+			'secure'      => function (string $value) {
 				$this->setMultiple($this->bool($value, 'secure'));
 			},
 			'multiple'    => function (string $value) {
@@ -146,7 +154,8 @@ class ScannerConfig implements \JsonSerializable
 		return $props;
 	}
 
-	public static function fromFieldElement(\SimpleXMLElement $element): ScannerConfig
+	public static function fromFieldElement(\SimpleXMLElement $element
+	): ScannerConfig
 	{
 		$config = new self();
 
@@ -160,7 +169,8 @@ class ScannerConfig implements \JsonSerializable
 
 	private function bool(string $value, string $optionalValue = ''): bool
 	{
-		return ($value === 'true' || $value == '1' || $value === $optionalValue);
+		return ($value === 'true' || $value == '1'
+			|| $value === $optionalValue);
 	}
 
 	private function list(string $value): array
@@ -168,7 +178,9 @@ class ScannerConfig implements \JsonSerializable
 		return explode(',', $value ?: '');
 	}
 
-	public static function modeId(string $mode, string $default = self::MODE_FILES): string
+	public static function modeId(
+		string $mode, string $default = self::MODE_FILES
+	): string
 	{
 		return self::$modes[$mode] ?? $default;
 	}
@@ -182,7 +194,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param string $include
+	 * @param   string  $include
 	 *
 	 * @return ScannerConfig
 	 */
@@ -202,7 +214,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param string $exclude
+	 * @param   string  $exclude
 	 *
 	 * @return ScannerConfig
 	 */
@@ -222,7 +234,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param string[] $ignore
+	 * @param   string[]  $ignore
 	 *
 	 * @return ScannerConfig
 	 */
@@ -242,7 +254,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param bool $recursive
+	 * @param   bool  $recursive
 	 *
 	 * @return ScannerConfig
 	 */
@@ -262,7 +274,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param string $directory
+	 * @param   string  $directory
 	 *
 	 * @return ScannerConfig
 	 */
@@ -282,7 +294,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param mixed $mode
+	 * @param   mixed  $mode
 	 *
 	 * @return ScannerConfig
 	 */
@@ -302,7 +314,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param bool $showHidden
+	 * @param   bool  $showHidden
 	 *
 	 * @return ScannerConfig
 	 */
@@ -322,7 +334,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param bool $multiple
+	 * @param   bool  $multiple
 	 *
 	 * @return ScannerConfig
 	 */
@@ -342,7 +354,7 @@ class ScannerConfig implements \JsonSerializable
 	}
 
 	/**
-	 * @param bool $secure
+	 * @param   bool  $secure
 	 *
 	 * @return ScannerConfig
 	 */
@@ -352,4 +364,5 @@ class ScannerConfig implements \JsonSerializable
 
 		return $this;
 	}
+
 }
