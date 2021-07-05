@@ -2,17 +2,17 @@
 <form>
 	<fields name="fieldparams">
 		<fieldset name="fieldparams" addfieldpath="/plugins/fields/filepicker/fields">
-			<!-- mode="files" -->
-			<!-- include="/\.(gif|jpg|jpeg|png|svg)$/" -->
 			<field name="baseDir"
 				   type="filepicker"
 				   label="PLG_FIELDS_FILEPICKER_BASE_DIR_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_BASE_DIR_DESC"
 				   directory="/"
+				   mode="folders"
 				   show_hidden="false"
 				   recursive="false"
 				   multiple="false"
 				   exclude=""
+				   include=""
 				   ignore=""
 			/>
 
