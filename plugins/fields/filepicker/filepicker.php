@@ -43,7 +43,7 @@ class PlgFieldsFilepicker extends \FieldsPlugin
 		$fieldNode->setAttribute('language', $field->fieldparams->get('language', '*'));
 
 		$fieldNode->setAttribute('directory', ((array)$field->fieldparams->get('baseDir', '/'))[0]);
-		$fieldNode->setAttribute('mode', $field->fieldparams->get('mode', 'files'));
+		$fieldNode->setAttribute('mode', $field->fieldparams->get('mode', 'all'));
 		$fieldNode->setAttribute('show_hidden', $field->fieldparams->get('showHidden', '0'));
 		$fieldNode->setAttribute('recursive', $field->fieldparams->get('recursive', '1'));
 		$fieldNode->setAttribute('multiple', $field->fieldparams->get('multiple', '0'));
