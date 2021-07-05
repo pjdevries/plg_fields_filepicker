@@ -198,7 +198,7 @@ Obix.text = Obix.text || {
                 // Multi select && toggled entry is now selected && toggled entry path does not exist in selected paths.
                 if (entry.selected && toggledEntryIndex === -1) {
                     // Add toggled entry path to selected paths.
-                    this.selectedPaths.splice(toggledEntryIndex, 1, entry.path);
+                    this.selectedPaths.push(entry.path);
                 }
 
                 // Multi select && (

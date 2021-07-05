@@ -110,8 +110,10 @@ $doc->addScriptOptions(
         </template>
     </div>
 
-    <input type="hidden" id="<?= $id ?>" name="<?= $name ?>[]"
-           :value="selectedPaths">
+    <template x-for="path in selectedPaths">
+        <input type="hidden" id="<?= $id ?>" name="<?= $name ?>"
+               :value="path">
+    </template>
     <input type="hidden" name="<?= $config['token'] ?>" value="1">
 </div>
 
