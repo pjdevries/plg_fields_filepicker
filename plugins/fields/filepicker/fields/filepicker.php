@@ -131,11 +131,12 @@ class JFormFieldFilePicker extends JFormField
 	protected function getInput(): string
 	{
 		$displayData = [
-			'id'            => $this->fieldname,
+			'id'            => $this->id,
+			'name'          => $this->name,
+			'fieldname'     => $this->fieldname,
+			'group'         => $this->group,
 			'displayHeight' => $this->displayHeight ?: "300px",
 			'config'        => [
-				'name'       => $this->fieldname,
-				'group'      => $this->group,
 				'baseDir'    => $this->directory,
 				'multiple'   => $this->multiple,
 				'recursive'  => $this->recursive,
@@ -149,8 +150,8 @@ class JFormFieldFilePicker extends JFormField
 					->getFormToken() : '',
 				'fetchUri'   => Uri::base()
 					. '/?option=com_ajax&format=json&group=fields&plugin=filepicker&format=json',
-				'selected'      => $this->value,
-			]
+				'selected'   => $this->value,
+			],
 		];
 
 		$this->initView($displayData);

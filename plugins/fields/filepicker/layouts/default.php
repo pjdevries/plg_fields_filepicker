@@ -13,6 +13,7 @@ use Joomla\CMS\Language\Text;
 
 /** @var array $displayData */
 $id     = $displayData['id'];
+$name   = $displayData['name'];
 $config = $displayData['config'];
 
 $doc = Factory::getDocument();
@@ -47,7 +48,7 @@ $doc->addScriptOptions(
 	]
 );
 ?>
-<div id="<?php echo $id; ?>" class="filepicker"
+<div class="filepicker"
      x-data="Obix.filepicker(JSON.parse(Joomla.getOptions('filepicker')['<?= $id ?>'].config))">
 
     <div class="filepicker-top">
@@ -96,14 +97,21 @@ $doc->addScriptOptions(
 
     <div class="filepicker-bottom">
         <span><?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span>
-        <template x-if="!config.multiple">
+        <template x-if="!config.multiple || selectedPaths.length  === 1">
+        <span
+                x-text="selectedPaths[0]"
+                @click="goToSelected(0)"></span>
+        </template>
+
+        <template x-if="config.multiple && selectedPaths.length  > 1">
         <span
                 x-text="selectedPaths.length > 0 ? selectedPaths[0] : ''"
-                @click="goToSelected(0)"></span>
+                @click="goToSelected(selectedPaths[selectedPaths.length - 1])"></span>
         </template>
     </div>
 
-    <input type="hidden" name="jform[params][<?= $id ?>]" :value="selectedPaths">
+    <input type="hidden" id="<?= $id ?>" name="<?= $name ?>[]"
+           :value="selectedPaths">
     <input type="hidden" name="<?= $config['token'] ?>" value="1">
 </div>
 
