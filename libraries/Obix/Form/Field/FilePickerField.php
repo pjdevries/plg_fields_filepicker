@@ -13,7 +13,7 @@ namespace Obix\Form\Field;
 defined('JPATH_PLATFORM') or die;
 
 use Joomla\CMS\Form\FormField;
-use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\Text;
@@ -147,10 +147,8 @@ class FilePickerField extends FormField
 
 		$this->initView($displayData);
 
-		// (new FileLayout('default'))->render($data);
-		$html = LayoutHelper::render(
-			'default', $displayData,
-			JPATH_PLUGINS . '/fields/filepicker/layouts'
+		$html = (new FileLayout('obix.form.field.filepicker'))->render(
+			$displayData
 		);
 
 		return $html;
