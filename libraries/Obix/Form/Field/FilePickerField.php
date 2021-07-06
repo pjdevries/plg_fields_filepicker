@@ -8,8 +8,11 @@
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
+namespace Obix\Form\Field;
+
 defined('JPATH_PLATFORM') or die;
 
+use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
@@ -17,14 +20,8 @@ use Joomla\CMS\Language\Text;
 use Obix\Filesystem\Folder\Scanner\ScannerConfig;
 
 \JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
-\JFormHelper::loadFieldClass('list');
 
-/**
- * Supports an HTML select list of folder
- *
- * @since  1.7.0
- */
-class JFormFieldFilePicker extends JFormField
+class FilePickerField extends FormField
 {
 
 	/**
@@ -284,7 +281,7 @@ class JFormFieldFilePicker extends JFormField
 	 * @see     JFormField::setup()
 	 * @since   3.2
 	 */
-	public function setup(SimpleXMLElement $element, $value, $group = null)
+	public function setup(\SimpleXMLElement $element, $value, $group = null)
 	{
 		$value = empty($value)
 			? []

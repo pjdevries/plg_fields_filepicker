@@ -18,6 +18,7 @@ use Obix\Filesystem\Folder\Acceptor\FilepickerAcceptor;
 
 \JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
 \JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
+\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\Form\\Field\\FilePickerField', '5.0');
 
 class PlgFieldsFilepicker extends \FieldsPlugin
 {
