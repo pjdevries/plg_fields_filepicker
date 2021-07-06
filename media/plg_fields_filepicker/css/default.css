@@ -50,20 +50,20 @@
 
 .entry.file .icon {
     color: black;
-    background: no-repeat url(/plugins/fields/filepicker/media/icons/file-regular.svg);
+    background: no-repeat url(../images/file-regular.svg);
 }
 
 .entry.folder .icon {
-    background: no-repeat url(/plugins/fields/filepicker/media/icons/folder-solid.svg);
+    background: no-repeat url(../images/folder-solid.svg);
     cursor: pointer;
 }
 
 .entry.folder .icon:hover {
-    background: no-repeat url(/plugins/fields/filepicker/media/icons/folder-open-solid.svg);
+    background: no-repeat url(../images/folder-open-solid.svg);
 }
 
 .entry.folder.exit .icon {
-    background: no-repeat url(/plugins/fields/filepicker/media/icons/level-up-alt.svg);
+    background: no-repeat url(../images/level-up-alt.svg);
     cursor: pointer;
 }
 

@@ -8,38 +8,28 @@
  */
 
 use Joomla\CMS\Factory;
-use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /** @var array $displayData */
 $id     = $displayData['id'];
 $name   = $displayData['name'];
 $config = $displayData['config'];
 
-$doc = Factory::getDocument();
-$doc->addStyleSheet(
-	Uri::root() . 'plugins/fields/filepicker/media/css/default.css'
+HTMLHelper::_(
+	'stylesheet', 'plg_fields_filepicker/default.min.css',
+	['version' => 'auto', 'relative' => true]
 );
-$doc->addScript(
-	Uri::root() . 'plugins/fields/filepicker/media/js/filepicker.js',
-	[],
-	[
-		'defer'    => true,
-		'version'  => 'auto',
-		'relative' => false,
-	]
+HTMLHelper::_(
+	'script', 'plg_fields_filepicker/filepicker.min.js',
+	['defer' => true, 'version' => 'auto', 'relative' => true]
 );
-$doc->addScript(
-	'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
-	[],
-	[
-		'defer'    => true,
-		'version'  => 'auto',
-		'relative' => false,
-	]
+HTMLHelper::_(
+	'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
+	['defer' => true, 'version' => 'auto', 'relative' => false]
 );
 
-$doc->addScriptOptions(
+Factory::getDocument()->addScriptOptions(
 	'filepicker',
 	[
 		$id => [
