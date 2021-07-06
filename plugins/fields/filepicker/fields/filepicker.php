@@ -14,15 +14,9 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\Text;
-use Filepicker\Scanner;
-use Filepicker\ScannerConfig;
-use Filepicker\FilepickerAcceptor;
-use Filepicker\Helper;
-use Filepicker\Folder;
+use Obix\Filesystem\Folder\Scanner\ScannerConfig;
 
-\JLoader::registerNamespace(
-	'Filepicker', JPATH_PLUGINS . '/fields/filepicker/libraries'
-);
+\JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
 \JFormHelper::loadFieldClass('list');
 
 /**

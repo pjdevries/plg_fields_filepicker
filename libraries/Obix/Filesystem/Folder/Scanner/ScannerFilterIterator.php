@@ -7,7 +7,9 @@
  * @license     A "Slug" license name e.g. GPL2
  */
 
-namespace Filepicker;
+namespace Obix\Filesystem\Folder\Scanner;
+
+use Obix\Filesystem\Folder\Acceptor\ScannerFilterAcceptor;
 
 class ScannerFilterIterator extends \FilterIterator
 {

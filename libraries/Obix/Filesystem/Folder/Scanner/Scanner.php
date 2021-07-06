@@ -6,7 +6,13 @@
  * @copyright   A copyright
  * @license     A "Slug" license name e.g. GPL2
  */
-namespace Filepicker;
+namespace Obix\Filesystem\Folder\Scanner;
+
+use Obix\Filesystem\Folder\Acceptor\ScannerFilterAcceptor;
+use Obix\Filesystem\Folder\Entry;
+use Obix\Filesystem\Folder\File;
+use Obix\Filesystem\Folder\Folder;
+use Obix\Filesystem\Folder\Helper;
 
 class Scanner
 {

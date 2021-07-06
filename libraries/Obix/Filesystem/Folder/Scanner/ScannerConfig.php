@@ -7,11 +7,11 @@
  * @license     A "Slug" license name e.g. GPL2
  */
 
-namespace Filepicker;
+namespace Obix\Filesystem\Folder\Scanner;
 
 use Joomla\CMS\Factory;
-use Joomla\Registry\Registry;
 use Joomla\Input\Input;
+use Obix\Filesystem\Folder\Helper;
 
 class ScannerConfig implements \JsonSerializable
 {

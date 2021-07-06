@@ -7,7 +7,7 @@
  * @license     A "Slug" license name e.g. GPL2
  */
 
-namespace Filepicker;
+namespace Obix\Filesystem\Folder;
 
 class File extends Entry
 {

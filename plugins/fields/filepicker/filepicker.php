@@ -12,11 +12,11 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-use Filepicker\Scanner;
-use Filepicker\ScannerConfig;
-use Filepicker\FilepickerAcceptor;
+use Obix\Filesystem\Folder\Scanner\Scanner;
+use Obix\Filesystem\Folder\Scanner\ScannerConfig;
+use Obix\Filesystem\Folder\Acceptor\FilepickerAcceptor;
 
-\JLoader::registerNamespace('Filepicker', JPATH_PLUGINS . '/fields/filepicker/libraries');
+\JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
 \JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
 
 class PlgFieldsFilepicker extends \FieldsPlugin
