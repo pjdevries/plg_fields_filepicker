@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields name="fieldparams">
-		<fieldset name="fieldparams" addfieldpath="/plugins/fields/filepicker/fields">
+		<fieldset name="fieldparams">
 			<field name="baseDir"
 				   type="filepicker"
 				   label="PLG_FIELDS_FILEPICKER_BASE_DIR_LABEL"
