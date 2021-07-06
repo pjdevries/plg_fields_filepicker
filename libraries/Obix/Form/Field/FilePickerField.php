@@ -13,6 +13,7 @@ namespace Obix\Form\Field;
 defined('JPATH_PLATFORM') or die;
 
 use Joomla\CMS\Form\FormField;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
@@ -156,15 +157,18 @@ class FilePickerField extends FormField
 
 	protected function initView(array $displayData)
 	{
-		$doc = Factory::getDocument();
-		$doc->addStyleSheet(
-			Uri::root() . 'plugins/fields/filepicker/media/css/filepicker.css'
+		HTMLHelper::_(
+			'stylesheet', 'plg_fields_filepicker/default.min.css',
+			['version' => 'auto', 'relative' => true]
 		);
-		$doc->addScript(
-			Uri::root() . 'plugins/fields/filepicker/media/js/filepicker.js',
-			[], ['defer' => true]
+		HTMLHelper::_(
+			'script', 'plg_fields_filepicker/filepicker.min.js',
+			['defer' => true, 'version' => 'auto', 'relative' => true]
 		);
-		//		$doc->addScriptOptions('filepicker', [$displayData['id'] => $displayData]);
+		HTMLHelper::_(
+			'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
+			['defer' => true, 'version' => 'auto', 'relative' => false]
+		);
 
 		$languageStrings = [
 			'PLG_FIELD_FILEPICKER_SELECT',
