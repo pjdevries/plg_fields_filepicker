@@ -141,7 +141,7 @@ class FilePickerField extends FormField
 				'token'      => $this->secure ? Factory::getSession()
 					->getFormToken() : '',
 				'fetchUri'   => Uri::base()
-					. '/?option=com_ajax&format=json&group=fields&plugin=filepicker&format=json',
+					. '?option=com_ajax&format=json&group=fields&plugin=filepicker&format=json',
 				'selected'   => $this->value,
 			],
 		];
@@ -157,18 +157,18 @@ class FilePickerField extends FormField
 
 	protected function initView(array $displayData)
 	{
-		HTMLHelper::_(
-			'stylesheet', 'plg_fields_filepicker/default.min.css',
-			['version' => 'auto', 'relative' => true]
-		);
-		HTMLHelper::_(
-			'script', 'plg_fields_filepicker/filepicker.min.js',
-			['defer' => true, 'version' => 'auto', 'relative' => true]
-		);
-		HTMLHelper::_(
-			'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
-			['defer' => true, 'version' => 'auto', 'relative' => false]
-		);
+//		HTMLHelper::_(
+//			'stylesheet', 'plg_fields_filepicker/default.min.css',
+//			['version' => 'auto', 'relative' => true]
+//		);
+//		HTMLHelper::_(
+//			'script', 'plg_fields_filepicker/filepicker.min.js',
+//			['defer' => true, 'version' => 'auto', 'relative' => true]
+//		);
+//		HTMLHelper::_(
+//			'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
+//			['defer' => true, 'version' => 'auto', 'relative' => false]
+//		);
 
 		$languageStrings = [
 			'PLG_FIELD_FILEPICKER_SELECT',
@@ -179,9 +179,11 @@ class FilePickerField extends FormField
 			'PLG_FIELDS_FILEPICKER_AJAX_ERROR',
 		];
 		array_walk(
-			$languageStrings, function (string $langString) {
-			Text::script($langString);
-		}
+			$languageStrings,
+			function (string $langString)
+			{
+				Text::script($langString);
+			}
 		);
 	}
 
