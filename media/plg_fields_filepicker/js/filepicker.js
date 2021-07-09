@@ -102,44 +102,44 @@ Obix.text = Obix.text || {
         }
     }
 
-    O.filepicker = function (config) {
-        const fetchEntries = async function (uri, folderPath) {
-            const data = {
-                option: 'com_ajax',
-                group: 'fields',
-                plugin: 'Filepicker',
-                format: 'json',
-                folder: folderPath,
-                config: JSON.stringify(config)
-            };
-            data[config.token] = '1';
-            const query = Object.entries(data)
-                .map((element) => element[0] + '=' + encodeURIComponent(element[1])).join('&');
-            const response = await fetch(uri, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: query
-            });
-
-            if (!response.ok) {
-                throw new Error(O.text._('PLG_FIELDS_FILEPICKER_AJAX_ERROR'));
-            }
-
-            const responseData = await response.json();
-
-            if (!responseData.success) {
-                throw new Error(O.text._(response.message));
-            }
-
-            return responseData;
+    const fetchEntries = async function (config, folderPath) {
+        const data = {
+            option: 'com_ajax',
+            group: 'fields',
+            plugin: 'Filepicker',
+            format: 'json',
+            folder: folderPath,
+            config: JSON.stringify(config)
         };
+        data[config.token] = '1';
+        const query = Object.entries(data)
+            .map((element) => element[0] + '=' + encodeURIComponent(element[1])).join('&');
+        const response = await fetch(config.fetchUri, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: query
+        });
 
+        if (!response.ok) {
+            throw new Error(O.text._('PLG_FIELDS_FILEPICKER_AJAX_ERROR'));
+        }
+
+        const responseData = await response.json();
+
+        if (!responseData.success) {
+            throw new Error(O.text._(response.message));
+        }
+
+        return responseData;
+    };
+
+    O.filepicker = function (config) {
         return {
-            config: config,
             folder: new Folder(config.baseDir),
             selectedPaths: [],
+            config: config,
             async init() {
                 this.selectedPaths = config.selected;
                 this.folder = await this.load(config.baseDir);
@@ -213,7 +213,7 @@ Obix.text = Obix.text || {
                 this.folder = await this.load(path);
             },
             async load(path) {
-                let response = await fetchEntries(config.fetchUri, path);
+                let response = await fetchEntries(config, path);
 
                 const entries = response.data[0].entries.map(entryData => {
                     const entry = Entry.fromResponseData(entryData);
