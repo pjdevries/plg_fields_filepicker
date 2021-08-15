@@ -55,7 +55,6 @@ class PlgFieldsFilepicker extends \FieldsPlugin
 		$fieldNode->setAttribute('exclude_files', $field->fieldparams->get('exclude_files', ''));
 		$fieldNode->setAttribute('exclude_folders', $field->fieldparams->get('exclude_folders', ''));
 		$fieldNode->setAttribute('ignore', $field->fieldparams->get('ignore', ''));
-		$fieldNode->setAttribute('display_height', $field->fieldparams->get('displayHeight', '300px'));
 
 		return $fieldNode;
 	}

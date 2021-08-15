@@ -132,13 +132,6 @@
 				   description="PLG_FIELDS_FILEPICKER_IGNORE_DESC"
 				   default="CVS,.svn,.git,.idea,.DS_Store,__MACOSX"
 			/>
-
-			<field name="displayHeight"
-				   type="text"
-				   label="PLG_FIELDS_FILEPICKER_DISPLAY_HEIGHT_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_DISPLAY_HEIGHT_DESC"
-				   default="300px"
-			/>
 		</fieldset>
 	</fields>
 </form>

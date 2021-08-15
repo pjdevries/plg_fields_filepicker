@@ -107,8 +107,6 @@ class FilePickerField extends FormField
 
 	protected $secure;
 
-	protected $displayHeight = '300px';
-
 	public function __construct($form = null)
 	{
 		parent::__construct($form);
@@ -134,7 +132,6 @@ class FilePickerField extends FormField
 			'name'          => $this->name,
 			'fieldname'     => $this->fieldname,
 			'group'         => $this->group,
-			'displayHeight' => $this->displayHeight ?: "300px",
 			'config'        => [
 				'baseDir'        => $this->directory,
 				'multiple'       => $this->multiple,
@@ -260,10 +257,6 @@ class FilePickerField extends FormField
 			$this->$name = ScannerConfig::modeId($value);
 			break;
 
-		case 'displayHeight':
-			$this->$name = (int) $value;
-			break;
-
 		case 'hideNone':
 		case 'hideDefault':
 		case 'recursive':
@@ -336,7 +329,6 @@ class FilePickerField extends FormField
 			$this->recursive     = $this->parBool('recursive', 'recursive');
 			$this->multiple      = $this->parBool('multiple', 'multiple');
 			$this->secure        = $this->parBool('secure', 'secure');
-			$this->displayHeight = $this->element['display_height'] ?: '300px';
 		}
 
 		return $return;
