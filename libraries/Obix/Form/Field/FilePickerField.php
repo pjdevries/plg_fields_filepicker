@@ -165,19 +165,6 @@ class FilePickerField extends FormField
 
 	protected function initView(array $displayData)
 	{
-		//		HTMLHelper::_(
-		//			'stylesheet', 'plg_fields_filepicker/default.min.css',
-		//			['version' => 'auto', 'relative' => true]
-		//		);
-		//		HTMLHelper::_(
-		//			'script', 'plg_fields_filepicker/filepicker.min.js',
-		//			['defer' => true, 'version' => 'auto', 'relative' => true]
-		//		);
-		//		HTMLHelper::_(
-		//			'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
-		//			['defer' => true, 'version' => 'auto', 'relative' => false]
-		//		);
-
 		$languageStrings = [
 			'PLG_FIELD_FILEPICKER_SELECT',
 			'PLG_FIELD_FILEPICKER_UNSELECT',
@@ -307,16 +294,15 @@ class FilePickerField extends FormField
 		if ($return)
 		{
 			$this->include = (string) $this->element['include'];
-			$this->includeFiles = (string) $this->element['include_files'];
-			$this->includeFolders = (string) $this->element['include_folders'];
+			$this->includeFiles = (string) $this->element['includeFiles'];
+			$this->includeFolders = (string) $this->element['includeFolders'];
 			$this->exclude = (string) $this->element['exclude'];
-			$this->excludeFiles = (string) $this->element['exclude_files'];
-			$this->excludeFolders = (string) $this->element['exclude_folders'];
+			$this->excludeFiles = (string) $this->element['excludeFiles'];
+			$this->excludeFolders = (string) $this->element['excludeFolders'];
 			if (!empty($ignore = (string) $this->element['ignore']))
 			{
 				$this->ignore = explode(',', $ignore);
 			}
-			$this->recursive     = $this->parBool('recursive', 'recursive');
 			$this->hideNone      = $this->parBool('hide_none', 'hideNone');
 			$this->hideDefault   = $this->parBool(
 				'hide_default', 'hideDefault'
@@ -325,7 +311,7 @@ class FilePickerField extends FormField
 			$this->mode          = ScannerConfig::modeId(
 				(string) $this->element['mode']
 			);
-			$this->showHidden    = $this->parBool('show_hidden', 'showHidden');
+			$this->showHidden    = $this->parBool('showHidden', 'showHidden');
 			$this->recursive     = $this->parBool('recursive', 'recursive');
 			$this->multiple      = $this->parBool('multiple', 'multiple');
 			$this->secure        = $this->parBool('secure', 'secure');

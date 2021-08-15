@@ -45,15 +45,15 @@ class PlgFieldsFilepicker extends \FieldsPlugin
 
 		$fieldNode->setAttribute('directory', ((array)$field->fieldparams->get('baseDir', '/'))[0]);
 		$fieldNode->setAttribute('mode', $field->fieldparams->get('mode', 'all'));
-		$fieldNode->setAttribute('show_hidden', $field->fieldparams->get('showHidden', '0'));
+		$fieldNode->setAttribute('showHidden', $field->fieldparams->get('showHidden', '0'));
 		$fieldNode->setAttribute('recursive', $field->fieldparams->get('recursive', '1'));
 		$fieldNode->setAttribute('multiple', $field->fieldparams->get('multiple', '0'));
 		$fieldNode->setAttribute('include', $field->fieldparams->get('include', 0));
-		$fieldNode->setAttribute('include_files', $field->fieldparams->get('include_files', ''));
-		$fieldNode->setAttribute('include_folders', $field->fieldparams->get('include_folders', ''));
+		$fieldNode->setAttribute('includeFiles', $field->fieldparams->get('includeFiles', ''));
+		$fieldNode->setAttribute('includeFolders', $field->fieldparams->get('includeFolders', ''));
 		$fieldNode->setAttribute('exclude', $field->fieldparams->get('exclude', 0));
-		$fieldNode->setAttribute('exclude_files', $field->fieldparams->get('exclude_files', ''));
-		$fieldNode->setAttribute('exclude_folders', $field->fieldparams->get('exclude_folders', ''));
+		$fieldNode->setAttribute('excludeFiles', $field->fieldparams->get('excludeFiles', ''));
+		$fieldNode->setAttribute('excludeFolders', $field->fieldparams->get('excludeFolders', ''));
 		$fieldNode->setAttribute('ignore', $field->fieldparams->get('ignore', ''));
 
 		return $fieldNode;

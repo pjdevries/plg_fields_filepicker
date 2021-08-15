@@ -104,7 +104,7 @@ class ScannerConfig implements \JsonSerializable
 			'recursive'   => function (string $value) {
 				$this->setRecursive($this->bool($value, 'recursive'));
 			},
-			'show_hidden' => function (string $value) {
+			'showHidden' => function (string $value) {
 				$this->setShowHidden($this->bool($value, 'showHidden'));
 			},
 			'mode'        => function (string $value) {
@@ -113,19 +113,19 @@ class ScannerConfig implements \JsonSerializable
 			'include'     => function (string $value) {
 				$this->setInclude($this->bool($value, 'include'));
 			},
-			'include_files'   => function (string $value) {
+			'includeFiles'   => function (string $value) {
 				$this->setIncludeFiles($value);
 			},
-			'include_folders'   => function (string $value) {
+			'includeFolders'   => function (string $value) {
 				$this->setIncludeFolders($value);
 			},
 			'exclude'     => function (string $value) {
 				$this->setExclude($this->bool($value, 'exclude'));
 			},
-			'exclude_files'   => function (string $value) {
+			'excludeFiles'   => function (string $value) {
 				$this->setExcludeFiles($value);
 			},
-			'exclude_folders'   => function (string $value) {
+			'excludeFolders'   => function (string $value) {
 				$this->setExcludeFolders($value);
 			},
 			'ignore'      => function (string $value) {

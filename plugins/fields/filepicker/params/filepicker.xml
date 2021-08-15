@@ -8,8 +8,7 @@
 				   description="PLG_FIELDS_FILEPICKER_BASE_DIR_DESC"
 				   directory="/"
 				   mode="folders"
-				   show_hidden="false"
-				   recursive="false"
+				   showHidden="false"
 				   multiple="false"
 				   exclude=""
 				   include=""
@@ -39,19 +38,7 @@
 				<option value="files">PLG_FIELDS_FILEPICKER_MODE_FILES</option>
 				<option value="folders">PLG_FIELDS_FILEPICKER_MODE_FOLDERS</option>
 			</field>
-<!--
-			<field name="recursive"
-				   type="radio"
-				   label="PLG_FIELDS_FILEPICKER_RECURSIVE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_RECURSIVE_DESC"
-				   default="0"
-				   class="btn-group btn-group-yesno"
-				   filter="integer"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
--->
+
 			<field name="showHidden"
 				   type="radio"
 				   label="PLG_FIELDS_FILEPICKER_SHOW_HIDDEN_LABEL"
@@ -87,14 +74,14 @@
 				<option value="0">JNO</option>
 			</field>
 
-			<field name="include_files"
+			<field name="includeFiles"
 				   type="text"
 				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_DESC"
 				   showon="include:1[AND]mode:all,files"
 			/>
 
-			<field name="include_folders"
+			<field name="includeFolders"
 				   type="text"
 				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_DESC"
@@ -112,14 +99,14 @@
 				<option value="0">JNO</option>
 			</field>
 
-			<field name="exclude_files"
+			<field name="excludeFiles"
 				   type="text"
 				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_DESC"
 				   showon="exclude:1[AND]mode:all,files"
 			/>
 
-			<field name="exclude_folders"
+			<field name="excludeFolders"
 				   type="text"
 				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_DESC"
