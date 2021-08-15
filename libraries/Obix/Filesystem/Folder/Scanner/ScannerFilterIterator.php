@@ -9,7 +9,7 @@
 
 namespace Obix\Filesystem\Folder\Scanner;
 
-use Obix\Filesystem\Folder\Acceptor\ScannerFilterAcceptor;
+use Obix\Filesystem\Folder\Scanner\Acceptor\ScannerFilterAcceptor;
 
 class ScannerFilterIterator extends \FilterIterator
 {

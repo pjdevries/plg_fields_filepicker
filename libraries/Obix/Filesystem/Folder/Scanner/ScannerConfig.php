@@ -17,9 +17,7 @@ class ScannerConfig implements \JsonSerializable
 {
 
 	const MODE_ALL = 'all';
-
 	const MODE_FILES = 'files';
-
 	const MODE_FOLDERS = 'folders';
 
 	private static $modes
@@ -33,21 +31,28 @@ class ScannerConfig implements \JsonSerializable
 		];
 
 	/**
-	 * Inclusion filter.
+	 * Inclusion filters.
 	 *
-	 * @var    string
+	 * @var    bool
 	 * @since  3.2
 	 */
-	protected $include = '';
+	protected $include = false;
+
+	protected $includeFiles = '';
+
+	protected $includeFolders = '';
 
 	/**
-	 * Exclusion filter.
+	 * Exclusion filters.
 	 *
-	 * @var    string
+	 * @var    bool
 	 * @since  3.2
 	 */
-	protected $exclude = '';
+	protected $exclude = false;
 
+	protected $excludeFiles = '';
+
+	protected $excludeFolders = '';
 
 	protected $ignore
 		= [
@@ -60,7 +65,7 @@ class ScannerConfig implements \JsonSerializable
 		];
 
 	/**
-	 * The recursive.
+	 * Recursive.
 	 *
 	 * @var    string
 	 * @since  3.6
@@ -68,20 +73,20 @@ class ScannerConfig implements \JsonSerializable
 	protected $recursive = false;
 
 	/**
-	 * The directory.
+	 * Directory.
 	 *
 	 * @var    string
 	 * @since  3.2
 	 */
 	protected $directory = '/';
 
-	protected $mode = self::MODE_FILES;
-
-	protected $showHidden = false;
+	protected $secure = false;
 
 	protected $multiple = false;
 
-	protected $secure = false;
+	protected $showHidden = false;
+
+	protected $mode = self::MODE_FILES;
 
 	protected function setters()
 	{
@@ -106,10 +111,22 @@ class ScannerConfig implements \JsonSerializable
 				$this->setMode(self::$modes[$value] ?? self::MODE_FILES);
 			},
 			'include'     => function (string $value) {
-				$this->setInclude($value);
+				$this->setInclude($this->bool($value, 'include'));
+			},
+			'include_files'   => function (string $value) {
+				$this->setIncludeFiles($value);
+			},
+			'include_folders'   => function (string $value) {
+				$this->setIncludeFolders($value);
 			},
 			'exclude'     => function (string $value) {
-				$this->setExclude($value);
+				$this->setExclude($this->bool($value, 'exclude'));
+			},
+			'exclude_files'   => function (string $value) {
+				$this->setExcludeFiles($value);
+			},
+			'exclude_folders'   => function (string $value) {
+				$this->setExcludeFolders($value);
 			},
 			'ignore'      => function (string $value) {
 				$this->setIgnore(self::list($value));
@@ -183,46 +200,6 @@ class ScannerConfig implements \JsonSerializable
 	): string
 	{
 		return self::$modes[$mode] ?? $default;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getInclude(): string
-	{
-		return $this->include;
-	}
-
-	/**
-	 * @param   string  $include
-	 *
-	 * @return ScannerConfig
-	 */
-	public function setInclude(string $include): ScannerConfig
-	{
-		$this->include = $include;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getExclude(): string
-	{
-		return $this->exclude;
-	}
-
-	/**
-	 * @param   string  $exclude
-	 *
-	 * @return ScannerConfig
-	 */
-	public function setExclude(string $exclude): ScannerConfig
-	{
-		$this->exclude = $exclude;
-
-		return $this;
 	}
 
 	/**
@@ -361,6 +338,126 @@ class ScannerConfig implements \JsonSerializable
 	public function setSecure(bool $secure): ScannerConfig
 	{
 		$this->secure = $secure;
+
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isInclude(): bool
+	{
+		return $this->include;
+	}
+
+	/**
+	 * @param   bool  $include
+	 *
+	 * @return ScannerConfig
+	 */
+	public function setInclude(bool $include): ScannerConfig
+	{
+		$this->include = $include;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIncludeFiles(): string
+	{
+		return $this->includeFiles;
+	}
+
+	/**
+	 * @param   string  $includeFiles
+	 *
+	 * @return ScannerConfig
+	 */
+	public function setIncludeFiles(string $includeFiles): ScannerConfig
+	{
+		$this->includeFiles = $includeFiles;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIncludeFolders(): string
+	{
+		return $this->includeFolders;
+	}
+
+	/**
+	 * @param   string  $includeFolders
+	 *
+	 * @return ScannerConfig
+	 */
+	public function setIncludeFolders(string $includeFolders): ScannerConfig
+	{
+		$this->includeFolders = $includeFolders;
+
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isExclude(): bool
+	{
+		return $this->exclude;
+	}
+
+	/**
+	 * @param   bool  $exclude
+	 *
+	 * @return ScannerConfig
+	 */
+	public function setExclude(bool $exclude): ScannerConfig
+	{
+		$this->exclude = $exclude;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getExcludeFiles(): string
+	{
+		return $this->excludeFiles;
+	}
+
+	/**
+	 * @param   string  $excludeFiles
+	 *
+	 * @return ScannerConfig
+	 */
+	public function setExcludeFiles(string $excludeFiles): ScannerConfig
+	{
+		$this->excludeFiles = $excludeFiles;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getExcludeFolders(): string
+	{
+		return $this->excludeFolders;
+	}
+
+	/**
+	 * @param   string  $excludeFolders
+	 *
+	 * @return ScannerConfig
+	 */
+	public function setExcludeFolders(string $excludeFolders): ScannerConfig
+	{
+		$this->excludeFolders = $excludeFolders;
 
 		return $this;
 	}

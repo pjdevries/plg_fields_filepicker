@@ -14,7 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Obix\Filesystem\Folder\Scanner\Scanner;
 use Obix\Filesystem\Folder\Scanner\ScannerConfig;
-use Obix\Filesystem\Folder\Acceptor\FilepickerAcceptor;
+use Obix\Filesystem\Folder\Scanner\Acceptor\FilepickerAcceptor;
 
 \JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
 \JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
@@ -48,8 +48,12 @@ class PlgFieldsFilepicker extends \FieldsPlugin
 		$fieldNode->setAttribute('show_hidden', $field->fieldparams->get('showHidden', '0'));
 		$fieldNode->setAttribute('recursive', $field->fieldparams->get('recursive', '1'));
 		$fieldNode->setAttribute('multiple', $field->fieldparams->get('multiple', '0'));
-		$fieldNode->setAttribute('include', $field->fieldparams->get('include', ''));
-		$fieldNode->setAttribute('exclude', $field->fieldparams->get('exclude', ''));
+		$fieldNode->setAttribute('include', $field->fieldparams->get('include', 0));
+		$fieldNode->setAttribute('include_files', $field->fieldparams->get('include_files', ''));
+		$fieldNode->setAttribute('include_folders', $field->fieldparams->get('include_folders', ''));
+		$fieldNode->setAttribute('exclude', $field->fieldparams->get('exclude', 0));
+		$fieldNode->setAttribute('exclude_files', $field->fieldparams->get('exclude_files', ''));
+		$fieldNode->setAttribute('exclude_folders', $field->fieldparams->get('exclude_folders', ''));
 		$fieldNode->setAttribute('ignore', $field->fieldparams->get('ignore', ''));
 		$fieldNode->setAttribute('display_height', $field->fieldparams->get('displayHeight', '300px'));
 

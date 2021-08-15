@@ -31,6 +31,7 @@ Obix.text = Obix.text || {
         constructor(type, path = '', ...more) {
             this.type = type;
             this._path = new Path(path);
+            this.selectable = false;
             this.selected = false;
 
             Object.assign(this, more);
@@ -93,6 +94,20 @@ Obix.text = Obix.text || {
             Object.assign(this, more);
         }
 
+        sorted() {
+            return this.entries.sort(this.foldersFirstEntrySorter());
+        }
+
+        foldersFirstEntrySorter(reversed = false) {
+            return (e1, e2) => {
+                if (e1.type !== e2.type) {
+                    return e1.type === 'folder' ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
+                }
+
+                return e1.path.toLowerCase() < e2.path.toLowerCase() ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
+            }
+        }
+
         unselect(path) {
             const entry = this.entries.find(entry => entry.path === path);
 
@@ -142,21 +157,24 @@ Obix.text = Obix.text || {
             config: config,
             async init() {
                 this.selectedPaths = config.selected;
-                this.folder = await this.load(config.baseDir);
+                await this.load(config.baseDir);
             },
             isBase() {
                 return this.folder.path === config.baseDir;
             },
             async enterFolder(entry) {
-                this.folder = await this.load(entry.path);
+                await this.load(entry.path);
             },
             async exitFolder() {
-                this.folder = await this.load(this.folder.dirname);
+                await this.load(this.folder.dirname);
+            },
+            async goToRoot() {
+                await this.load('/');
             },
             async goToFolder(folderPathSegmentIndex) {
                 const path = '/' + this.folder.pathSegments().slice(0, folderPathSegmentIndex + 1).join('/');
 
-                this.folder = await this.load(path);
+                await this.load(path);
             },
             toggleSelect(entry) {
                 if (!(config.mode === 'all'
@@ -204,13 +222,26 @@ Obix.text = Obix.text || {
                 // Multi select && (
                 //  (toggled entry unselected && toggled entry path does not exist in selected paths)
                 //  || (toggled entry selected && toggled entry path exists in selected paths))
-
                 // Nothing to do.
+
+                this.selectedPaths.sort(this.filesFirstPathSorter());
+            },
+            filesFirstPathSorter(reversed = false) {
+                return (s1, s2) => {
+                    const segmentCount1 = s1.split('/').length;
+                    const segmentCount2 = s2.split('/').length;
+
+                    if (segmentCount1 !== segmentCount2) {
+                        return segmentCount1 < segmentCount2 ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
+                    }
+
+                    return s1.path.toLowerCase() < s2.path.toLowerCase() ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
+                }
             },
             async goToSelected(selectedPathIndex) {
                 const path = (new Path(this.selectedPaths[selectedPathIndex])).dirname;
 
-                this.folder = await this.load(path);
+                await this.load(path);
             },
             async load(path) {
                 let response = await fetchEntries(config, path);
@@ -218,12 +249,15 @@ Obix.text = Obix.text || {
                 const entries = response.data[0].entries.map(entryData => {
                     const entry = Entry.fromResponseData(entryData);
 
+                    entry.selectable = config.mode === 'all'
+                        || (config.mode === 'files' && entry.type === 'file')
+                        || (config.mode === 'folders' && entry.type === 'folder');
                     entry.selected = this.selectedPaths.indexOf(entry.path) > -1;
 
                     return entry;
                 });
 
-                return new Folder(path, entries);
+                this.folder = new Folder(path, entries);
             }
         }
     }

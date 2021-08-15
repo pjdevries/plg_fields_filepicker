@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<extension type="plugin" version="3.9.0" group="fields" method="upgrade">
+<extension type="plugin" group="fields" method="upgrade">
     <name>PLG_FIELDS_FILEPICKER</name>
     <creationDate>2021-06-08</creationDate>
     <author>Pieter-Jan de Vries/Obix webtechniek</author>
@@ -10,6 +10,10 @@
     <version>1.0.0</version>
     <description>PLG_FIELDS_FILEPICKER_XML_DESCRIPTION</description>
 
+    <!-- Scripts to run on installation -->
+    <scriptfile>script.php</scriptfile>
+
+    <!-- Plugin files -->
     <files>
         <filename plugin="filepicker">filepicker.php</filename>
         <folder>fields</folder>
@@ -31,16 +35,23 @@
         <files target="layouts/obix/form/field">
             <file>layouts/obix/form/field/filepicker.php</file>
         </files>
-        <files target="libraries/Obix/Filesystem/Folder">
-            <file>libraries/Obix/Filesystem/Folder/Acceptor/FilepickerAcceptor.php</file>
-            <file>libraries/Obix/Filesystem/Folder/Acceptor/ScannerFilterAcceptor.php</file>
+        <files target="libraries/Obix/Filesystem/Folder/Scanner">
             <file>libraries/Obix/Filesystem/Folder/Scanner/Scanner.php</file>
             <file>libraries/Obix/Filesystem/Folder/Scanner/ScannerConfig.php</file>
             <file>libraries/Obix/Filesystem/Folder/Scanner/ScannerFilterIterator.php</file>
+        </files>
+        <files target="libraries/Obix/Filesystem/Folder/Scanner/Acceptor">
+            <file>libraries/Obix/Filesystem/Folder/Scanner/Acceptor/FilepickerAcceptor.php</file>
+            <file>libraries/Obix/Filesystem/Folder/Scanner/Acceptor/ScannerFilterAcceptor.php</file>
+        </files>
+        <files target="libraries/Obix/Filesystem/Folder">
             <file>libraries/Obix/Filesystem/Folder/Entry.php</file>
             <file>libraries/Obix/Filesystem/Folder/File.php</file>
             <file>libraries/Obix/Filesystem/Folder/Folder.php</file>
             <file>libraries/Obix/Filesystem/Folder/Helper.php</file>
+        </files>
+        <files target="libraries/Obix/Filesystem/Form/Field">
+            <file>libraries/Obix/Filesystem/Form/Field/FilePickerField.php</file>
         </files>
     </fileset>
 
@@ -52,5 +63,9 @@
         </fields>
     </config>
 
-    <scriptfile>script.php</scriptfile>
+    <updateservers>
+        <server type="extension" priority="1" name="Obix File &amp; Folder Picker Form and Custom field plugin">
+            https://raw.githubusercontent.com/pjdevries/plg_system_classextender/master/classextender_update.xml
+        </server>
+    </updateservers>
 </extension>

@@ -41,6 +41,10 @@ class FilePickerField extends FormField
 	 */
 	protected $include = '';
 
+	protected $includeFiles = '';
+
+	protected $includeFolders = '';
+
 	/**
 	 * The exclude.
 	 *
@@ -49,6 +53,9 @@ class FilePickerField extends FormField
 	 */
 	protected $exclude = '';
 
+	protected $excludeFiles = '';
+
+	protected $excludeFolders = '';
 
 	protected $ignore
 		= [
@@ -129,20 +136,24 @@ class FilePickerField extends FormField
 			'group'         => $this->group,
 			'displayHeight' => $this->displayHeight ?: "300px",
 			'config'        => [
-				'baseDir'    => $this->directory,
-				'multiple'   => $this->multiple,
-				'recursive'  => $this->recursive,
-				'mode'       => $this->mode,
-				'showHidden' => $this->showHidden,
-				'include'    => $this->include,
-				'exclude'    => $this->exclude,
-				'ignore'     => $this->ignore,
-				'secure'     => $this->secure,
-				'token'      => $this->secure ? Factory::getSession()
+				'baseDir'        => $this->directory,
+				'multiple'       => $this->multiple,
+				'recursive'      => $this->recursive,
+				'mode'           => $this->mode,
+				'showHidden'     => $this->showHidden,
+				'include'        => $this->include,
+				'includeFiles'   => $this->includeFiles,
+				'includeFolders' => $this->includeFolders,
+				'exclude'        => $this->exclude,
+				'excludeFiles'   => $this->excludeFiles,
+				'excludeFolders' => $this->excludeFolders,
+				'ignore'         => $this->ignore,
+				'secure'         => $this->secure,
+				'token'          => $this->secure ? Factory::getSession()
 					->getFormToken() : '',
-				'fetchUri'   => Uri::base()
+				'fetchUri'       => Uri::base()
 					. '?option=com_ajax&format=json&group=fields&plugin=filepicker&format=json',
-				'selected'   => $this->value,
+				'selected'       => $this->value,
 			],
 		];
 
@@ -157,18 +168,18 @@ class FilePickerField extends FormField
 
 	protected function initView(array $displayData)
 	{
-//		HTMLHelper::_(
-//			'stylesheet', 'plg_fields_filepicker/default.min.css',
-//			['version' => 'auto', 'relative' => true]
-//		);
-//		HTMLHelper::_(
-//			'script', 'plg_fields_filepicker/filepicker.min.js',
-//			['defer' => true, 'version' => 'auto', 'relative' => true]
-//		);
-//		HTMLHelper::_(
-//			'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
-//			['defer' => true, 'version' => 'auto', 'relative' => false]
-//		);
+		//		HTMLHelper::_(
+		//			'stylesheet', 'plg_fields_filepicker/default.min.css',
+		//			['version' => 'auto', 'relative' => true]
+		//		);
+		//		HTMLHelper::_(
+		//			'script', 'plg_fields_filepicker/filepicker.min.js',
+		//			['defer' => true, 'version' => 'auto', 'relative' => true]
+		//		);
+		//		HTMLHelper::_(
+		//			'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
+		//			['defer' => true, 'version' => 'auto', 'relative' => false]
+		//		);
 
 		$languageStrings = [
 			'PLG_FIELD_FILEPICKER_SELECT',
@@ -180,8 +191,7 @@ class FilePickerField extends FormField
 		];
 		array_walk(
 			$languageStrings,
-			function (string $langString)
-			{
+			function (string $langString) {
 				Text::script($langString);
 			}
 		);
@@ -235,7 +245,11 @@ class FilePickerField extends FormField
 		switch ($name)
 		{
 		case 'include':
+		case 'includeFiles':
+		case 'includeFolders':
 		case 'exclude':
+		case 'excludeFiles':
+		case 'excludeFolders':
 		case 'ignore':
 		case 'directory':
 			$this->$name = (string) $value;
@@ -300,7 +314,11 @@ class FilePickerField extends FormField
 		if ($return)
 		{
 			$this->include = (string) $this->element['include'];
+			$this->includeFiles = (string) $this->element['include_files'];
+			$this->includeFolders = (string) $this->element['include_folders'];
 			$this->exclude = (string) $this->element['exclude'];
+			$this->excludeFiles = (string) $this->element['exclude_files'];
+			$this->excludeFolders = (string) $this->element['exclude_folders'];
 			if (!empty($ignore = (string) $this->element['ignore']))
 			{
 				$this->ignore = explode(',', $ignore);

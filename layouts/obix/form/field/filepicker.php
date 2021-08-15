@@ -21,12 +21,12 @@ HTMLHelper::_(
 	['version' => 'auto', 'relative' => true]
 );
 HTMLHelper::_(
-	'script', 'plg_fields_filepicker/filepicker.min.js',
-	['defer' => true, 'version' => 'auto', 'relative' => true]
+	'script', 'https://unpkg.com/petite-vue',
+	['version' => 'auto', 'relative' => false]
 );
 HTMLHelper::_(
-	'script', 'https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js',
-	['defer' => true, 'version' => 'auto', 'relative' => false]
+	'script', 'plg_fields_filepicker/filepicker.min.js',
+	['version' => 'auto', 'relative' => true]
 );
 
 Factory::getDocument()->addScriptOptions(
@@ -38,72 +38,55 @@ Factory::getDocument()->addScriptOptions(
 	]
 );
 ?>
-<div class="filepicker"
-     x-data="Obix.filepicker(JSON.parse(Joomla.getOptions('filepicker')['<?= $id ?>'].config))">
+<div id="filepicker-<?= $id ?>" class="filepicker">
+    <div class="fp-top">
+        <span class="fp-top-label"><?= Text::_('PLG_FIELD_FILEPICKER_CURRENT_FOLDER') ?></span>
 
-    <div class="filepicker-top">
-        <span><?= Text::_('PLG_FIELD_FILEPICKER_CURRENT_FOLDER') ?></span>
-        <template x-for="(segment, index) in folder.pathSegments()">
-            <div>
-                <span>/</span><span class="path-segment" x-text="segment"
-                                    @click="goToFolder(index)"></span>
-            </div>
-        </template>
-        <template x-if="folder.pathSegments().length === 0">
-            <span>/</span>
-        </template>
+        <div class="fp-path">
+            <span class="fp-path-segment" @click="goToRoot()">/</span>
+
+            <template v-for="(segment, index) in folder.pathSegments()">
+            <span class="fp-path-segment"
+                  @click="goToFolder(index)">{{ (index > 0 ? '/' : '') + segment }}</span>
+            </template>
+        </div>
     </div>
 
-    <div class="filepicker-entries"
-         style="height: <?= $displayData['displayHeight'] ?>;">
-        <template x-if="!isBase()">
-            <div class="entry folder exit">
-                <span class="icon" @click="exitFolder()"></span>
-            </div>
-        </template>
+    <div class="fp-entries" @mounted="init()">
+        <div v-if="!isBase()" class="fp-entry fp-folder-exit">
+            <span class="fp-icon" @click="exitFolder()"></span>
+        </div>
 
-        <template x-for="entry in folder.entries">
-            <div>
-                <template x-if="entry.type === 'file'">
-                    <div class="entry file" :class="{selected: entry.selected}">
-                        <span class="icon"></span><span
-                                x-text="entry.name"
-                                @click="toggleSelect(entry)"></span>
-                    </div>
-                </template>
-
-                <template x-if="entry.type === 'folder'">
-                    <div class="entry folder"
-                         :class="{selected: entry.selected}">
-                        <span class="icon"
-                              @click="enterFolder(entry)"></span><span
-                                x-text="entry.name"
-                                @click="toggleSelect(entry)"></span>
-                    </div>
-                </template>
+        <div v-for="entry in folder.sorted()" :key="entry.path">
+            <div v-if="entry.type === 'file'" class="fp-entry fp-file-entry"
+                 :class="{'fp-selectable': entry.selectable, 'fp-selected': entry.selected}">
+                <span class="fp-icon"></span><span class="fp-label"
+                                                @click="toggleSelect(entry)">{{ entry.name }}</span>
             </div>
-        </template>
+
+            <div v-if="entry.type === 'folder'" class="fp-entry fp-folder-entry"
+                 :class="{'fp-selectable': entry.selectable, 'fp-selected': entry.selected}">
+                <span class="fp-icon"
+                      @click="enterFolder(entry)"></span><span class="fp-label"
+                                                               @click="toggleSelect(entry)">{{ entry.name }}</span>
+            </div>
+        </div>
     </div>
 
-    <div class="filepicker-bottom">
-        <span><?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span>
-        <template x-if="!config.multiple || selectedPaths.length  === 1">
-        <span
-                x-text="selectedPaths[0]"
-                @click="goToSelected(0)"></span>
-        </template>
-
-        <template x-if="config.multiple && selectedPaths.length  > 1">
-        <span
-                x-text="selectedPaths.length > 0 ? selectedPaths[0] : ''"
-                @click="goToSelected(selectedPaths[selectedPaths.length - 1])"></span>
-        </template>
+    <div class="fp-bottom" :class="{'fp-one': selectedPaths.length  === 1, 'fp-more': selectedPaths.length  > 1}">
+        <span class="fp-bottom-label">{{ selectedPaths.length }} <?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span>
+        <div class="fp-selected-paths">
+            <span v-for="(path, index) in selectedPaths" @click="goToSelected(index)" class="fp-selected">{{ path }}</span>
+        </div>
     </div>
 
-    <template x-for="path in selectedPaths">
-        <input type="hidden" id="<?= $id ?>" name="<?= $name ?>"
-               :value="path">
-    </template>
+    <input v-for="path in selectedPaths" type="hidden" id="<?= $id ?>" name="<?= $name ?>"
+           :value="path">
     <input type="hidden" name="<?= $config['token'] ?>" value="1">
 </div>
 
+<script>
+    let filepicker = Obix.filepicker(JSON.parse(Joomla.getOptions('filepicker')['<?= $id ?>'].config));
+
+    PetiteVue.createApp(filepicker).mount("#filepicker-<?= $id ?>");
+</script>

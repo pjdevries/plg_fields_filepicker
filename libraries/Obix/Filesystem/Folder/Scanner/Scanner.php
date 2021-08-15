@@ -8,7 +8,7 @@
  */
 namespace Obix\Filesystem\Folder\Scanner;
 
-use Obix\Filesystem\Folder\Acceptor\ScannerFilterAcceptor;
+use Obix\Filesystem\Folder\Scanner\Acceptor\ScannerFilterAcceptor;
 use Obix\Filesystem\Folder\Entry;
 use Obix\Filesystem\Folder\File;
 use Obix\Filesystem\Folder\Folder;

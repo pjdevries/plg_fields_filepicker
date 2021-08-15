@@ -76,16 +76,54 @@
 				<option value="0">JNO</option>
 			</field>
 
-			<field name="exclude"
-				   type="text"
-				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_DESC"
-			/>
-
 			<field name="include"
-				   type="text"
+				   type="radio"
+				   default="0"
 				   label="PLG_FIELDS_FILEPICKER_INCLUDE_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_INCLUDE_DESC"
+				   class="btn-group btn-group-yesno"
+			>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+
+			<field name="include_files"
+				   type="text"
+				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_LABEL"
+				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_DESC"
+				   showon="include:1[AND]mode:all,files"
+			/>
+
+			<field name="include_folders"
+				   type="text"
+				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_LABEL"
+				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_DESC"
+				   showon="include:1"
+			/>
+
+			<field name="exclude"
+				   type="radio"
+				   default="0"
+				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_LABEL"
+				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_DESC"
+				   class="btn-group btn-group-yesno"
+			>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+
+			<field name="exclude_files"
+				   type="text"
+				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_LABEL"
+				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_DESC"
+				   showon="exclude:1[AND]mode:all,files"
+			/>
+
+			<field name="exclude_folders"
+				   type="text"
+				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_LABEL"
+				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_DESC"
+				   showon="exclude:1"
 			/>
 
 			<field name="ignore"
