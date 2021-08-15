@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="file" method="upgrade">
+    <name>File - Filepicker files</name>
+    <creationDate>2021-06-08</creationDate>
+    <author>Pieter-Jan de Vries/Obix webtechniek</author>
+    <authorEmail>pieter@obix.nl</authorEmail>
+    <authorUrl>https://www.obix.nl</authorUrl>
+    <copyright>(C) Obix webtechniek</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <version>1.0.0</version>
+    <description>Required files for Obix File &amp; Folder Picker Form field and Custom field plugin.</description>
+
+    <fileset>
+        <files folder="layouts/obix/form/field" target="layouts/obix/form/field">
+            <file>filepicker.php</file>
+        </files>
+
+        <files folder="libraries/Obix/Filesystem/Folder" target="libraries/Obix/Filesystem/Folder">
+            <file>Entry.php</file>
+            <file>File.php</file>
+            <file>Folder.php</file>
+            <file>Helper.php</file>
+        </files>
+        <files folder="libraries/Obix/Filesystem/Folder/Scanner" target="libraries/Obix/Filesystem/Folder/Scanner">
+            <file>Scanner.php</file>
+            <file>ScannerConfig.php</file>
+            <file>ScannerFilterIterator.php</file>
+        </files>
+        <files folder="libraries/Obix/Filesystem/Folder/Scanner/Acceptor" target="libraries/Obix/Filesystem/Folder/Scanner/Acceptor">
+            <file>FilepickerAcceptor.php</file>
+            <file>ScannerFilterAcceptor.php</file>
+        </files>
+        <files folder="libraries/Obix/Form/Field" target="libraries/Obix/Form/Field">
+            <file>FilePickerField.php</file>
+        </files>
+
+        <files folder="media/plg_fields_filepicker/css" target="media/plg_fields_filepicker/css">
+            <file>default.css</file>
+            <file>default.min.css</file>
+        </files>
+        <files folder="media/plg_fields_filepicker/images" target="media/plg_fields_filepicker/images">
+            <file>ban-solid.svg</file>
+            <file>file-regular.svg</file>
+            <file>file-solid.svg</file>
+            <file>folder-open.svg</file>
+            <file>folder-open-regular.svg</file>
+            <file>folder-open-solid.svg</file>
+            <file>folder-regular.svg</file>
+            <file>folder-solid.svg</file>
+            <file>level-down-alt.svg</file>
+            <file>level-up-alt.svg</file>
+            <file>minus-solid.svg</file>
+            <file>plus-solid.svg</file>
+        </files>
+        <files folder="media/plg_fields_filepicker/js" target="media/plg_fields_filepicker/js">
+            <file>filepicker.js</file>
+            <file>filepicker.min.js</file>
+        </files>
+    </fileset>
+</extension>

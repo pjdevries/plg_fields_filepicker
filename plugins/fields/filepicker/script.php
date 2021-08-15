@@ -1,12 +1,14 @@
 <?php
+
 use Joomla\CMS\Factory;
+use Joomla\CMS\Installer\Adapter\PluginAdapter;
 
 // no direct access
 defined('_JEXEC') or die;
 
 class plgfieldsfilepickerInstallerScript
 {
-	public function postflight($route, JAdapterInstance $adapter)
+	public function postflight($route, PluginAdapter $adapter)
 	{
         // Enable plugin on first installation only.
         if ($route === 'install')

@@ -10,9 +10,9 @@
 				   mode="folders"
 				   showHidden="false"
 				   multiple="false"
-				   exclude=""
-				   include=""
-				   ignore=""
+				   exclude="false"
+				   include="false"
+				   ignore="false"
 			/>
 
 			<field name="secure"
@@ -29,7 +29,7 @@
 
 			<field name="mode"
 				   type="list"
-				   default="all"
+				   default="folders"
 				   multiple="false"
 				   label="PLG_FIELDS_FILEPICKER_MODE_LABEL"
 				   description ="PLG_FIELDS_FILEPICKER_MODE_DESC"
@@ -76,6 +76,7 @@
 
 			<field name="includeFiles"
 				   type="text"
+				   default=""
 				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_DESC"
 				   showon="include:1[AND]mode:all,files"
@@ -83,6 +84,7 @@
 
 			<field name="includeFolders"
 				   type="text"
+				   default=""
 				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_DESC"
 				   showon="include:1"
@@ -101,6 +103,7 @@
 
 			<field name="excludeFiles"
 				   type="text"
+				   default=""
 				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_DESC"
 				   showon="exclude:1[AND]mode:all,files"
@@ -108,6 +111,7 @@
 
 			<field name="excludeFolders"
 				   type="text"
+				   default=""
 				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_LABEL"
 				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_DESC"
 				   showon="exclude:1"

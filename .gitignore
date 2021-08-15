@@ -1,6 +1,7 @@
 .idea
 vendor
 tmp
+packages
 *.min.js
 *.min.css
 *.zip

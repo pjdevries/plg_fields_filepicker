@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>Obix File &amp; Folder Picker Form field and Custom field Plugin</name>
+        <description>Form field and Custom field plugin for selection of files and/or  in the host's file system.</description>
+        <element>filepicker</element>
+        <type>plugin</type>
+        <folder>fields</folder>
+        <client>site</client>
+        <version>1.0.0</version>
+        <infourl title="Obix File &amp; Folder Picker Form field and Custom field Plugin">https://github.com/pjdevries/plg_fields_filepicker/releases/tag/v1.0.0</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/pjdevries/plg_system_filepicker/releases/download/v1.0.0/plg_fields_filepicker-1.0.0.zip</downloadurl>
+        </downloads>
+        <sha512></sha512>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <targetplatform name="joomla" version="(3.[9|10])|(4.0)" />
+    </update>
+</updates>

@@ -16,44 +16,10 @@
     <!-- Plugin files -->
     <files>
         <filename plugin="filepicker">filepicker.php</filename>
-        <folder>fields</folder>
         <folder>language</folder>
-        <folder>layouts</folder>
-        <folder>libraries</folder>
-        <folder>media</folder>
         <folder>params</folder>
         <folder>tmpl</folder>
     </files>
-
-    <media folder="media/plg_fields_filepicker" destination="plg_fields_filepicker">
-        <folder>css</folder>
-        <folder>images</folder>
-        <folder>js</folder>
-    </media>
-
-    <fileset>
-        <files target="layouts/obix/form/field">
-            <file>layouts/obix/form/field/filepicker.php</file>
-        </files>
-        <files target="libraries/Obix/Filesystem/Folder/Scanner">
-            <file>libraries/Obix/Filesystem/Folder/Scanner/Scanner.php</file>
-            <file>libraries/Obix/Filesystem/Folder/Scanner/ScannerConfig.php</file>
-            <file>libraries/Obix/Filesystem/Folder/Scanner/ScannerFilterIterator.php</file>
-        </files>
-        <files target="libraries/Obix/Filesystem/Folder/Scanner/Acceptor">
-            <file>libraries/Obix/Filesystem/Folder/Scanner/Acceptor/FilepickerAcceptor.php</file>
-            <file>libraries/Obix/Filesystem/Folder/Scanner/Acceptor/ScannerFilterAcceptor.php</file>
-        </files>
-        <files target="libraries/Obix/Filesystem/Folder">
-            <file>libraries/Obix/Filesystem/Folder/Entry.php</file>
-            <file>libraries/Obix/Filesystem/Folder/File.php</file>
-            <file>libraries/Obix/Filesystem/Folder/Folder.php</file>
-            <file>libraries/Obix/Filesystem/Folder/Helper.php</file>
-        </files>
-        <files target="libraries/Obix/Filesystem/Form/Field">
-            <file>libraries/Obix/Filesystem/Form/Field/FilePickerField.php</file>
-        </files>
-    </fileset>
 
     <config>
         <fields name="params">
@@ -64,8 +30,8 @@
     </config>
 
     <updateservers>
-        <server type="extension" priority="1" name="Obix File &amp; Folder Picker Form and Custom field plugin">
-            https://raw.githubusercontent.com/pjdevries/plg_system_classextender/master/classextender_update.xml
+        <server type="extension" priority="1" name="Obix File &amp; Folder Picker Form field and Custom field Plugin">
+            https://raw.githubusercontent.com/pjdevries/plg_system_classextender/master/filepicker_update.xml
         </server>
     </updateservers>
 </extension>
