@@ -12,15 +12,9 @@ class plgfieldsfilepickerInstallerScript
 	public function postflight($route, PluginAdapter $adapter)
 	{
 		// Enable plugin on first installation only.
-		switch ($route)
+		if ($route === 'install')
 		{
-		case 'install':
 			$this->activatePlugin();
-			break;
-
-		case 'uninstall':
-			$this->removeEmptyFolders();
-			break;
 		}
 	}
 
@@ -37,56 +31,4 @@ class plgfieldsfilepickerInstallerScript
 		$db->setQuery($query);
 		$db->execute();
 	}
-
-	private function removeEmptyFolders(): void
-	{
-		$folderPaths = [
-			'layouts'   => [
-				'layouts/obix/form/field',
-			],
-			'libraries' => [
-				'libraries/Obix/Filesystem/Folder/Scanner/Acceptor',
-				'libraries/Obix/Filesystem/Folder/Scanner',
-				'libraries/Obix/Filesystem/Folder',
-				'libraries/Obix/Form/Field',
-			],
-			'media'     => [
-				'media/plg_fields_filepicker/css',
-				'media/plg_fields_filepicker/images',
-				'media/plg_fields_filepicker/js',
-			],
-		];
-
-		foreach ($folderPaths as $base => $paths)
-		{
-			foreach ($paths as $path)
-			{
-				$this->removeEmptyFolder(JPATH_ROOT . '/' . $base, JPATH_ROOT . '/' . $path);
-			}
-		}
-	}
-
-	private function removeEmptyFolder(string $base, string $folderPath): void
-	{
-		do
-		{
-			if (!($this->isEmptyFolder($folderPath) && @rmdir($folderPath)))
-			{
-				break;
-			}
-
-			$folderPath = dirname($folderPath);
-		} while ($folderPath > $base);
-	}
-
-	private function isEmptyFolder(string $folderPath): bool
-	{
-		if (!(is_dir($folderPath) && is_readable($folderPath)))
-		{
-			return false;
-		}
-
-		return !(new \FilesystemIterator($folderPath))->valid();
-	}
-
 }
