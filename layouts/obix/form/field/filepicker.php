@@ -24,8 +24,7 @@ if (Version::MAJOR_VERSION <= 3)
 		['version' => 'auto', 'relative' => true]
 	);
 	HTMLHelper::_(
-		'script', 'https://unpkg.com/petite-vue',
-		['version' => 'auto', 'relative' => false]
+		'script', 'https://unpkg.com/petite-vue', [], ['defer' => true]
 	);
 	HTMLHelper::_(
 		'script', 'plg_fields_filepicker/filepicker.min.js',
@@ -37,11 +36,11 @@ else
 	$wa = Factory::getDocument()->getWebAssetManager();
 	$wa
 		->registerAndUseStyle('plg_fields_filepicker.default', 'plg_fields_filepicker/default.min.css')
+		->registerAndUseScript('petite-vue', 'https://unpkg.com/petite-vue', [], ['defer' => true], [])
 		->registerAndUseScript(
 			'plg_fields_filepicker.filepicker', 'plg_fields_filepicker/filepicker.min.js',
 			['relative' => true, 'version' => 'auto'], [], []
-		)
-		->registerAndUseScript('petite-vue', 'https://unpkg.com/petite-vue', [], ['defer' => true], []);
+		);
 }
 
 Factory::getDocument()->addScriptOptions(
