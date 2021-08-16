@@ -57,7 +57,7 @@ Factory::getDocument()->addScriptOptions(
         <span class="fp-top-label"><?= Text::_('PLG_FIELD_FILEPICKER_CURRENT_FOLDER') ?></span>
 
         <div class="fp-path">
-            <span class="fp-path-segment" @click="goToRoot()">/</span>
+            <span>/</span>
 
             <template v-for="(segment, index) in folder.pathSegments()">
             <span class="fp-path-segment"
