@@ -7,7 +7,7 @@ use Joomla\CMS\Language\Text;
 defined('_JEXEC') or die;
 
 /** @var \stdClass $field */
-$fieldValues = (array) $field->value ?: [];
+$fieldValues = array_filter((array) $field->value ?: [], 'strlen');
 
 if (!count($fieldValues))
 {
