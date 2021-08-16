@@ -58,6 +58,10 @@
     cursor: pointer;
 }
 
+.fp-entry.fp-selected {
+    color: blue;
+}
+
 .fp-entry .fp-label {
     position: relative;
 }
@@ -98,10 +102,6 @@
 .fp-selectable.fp-selected .fp-label:hover:after {
     background-color: orange;
     -webkit-mask: url(../images/minus-solid.svg) no-repeat;
-}
-
-.fp-entry.fp-selected {
-    color: blue;
 }
 
 .fp-entry .fp-icon {
