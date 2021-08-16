@@ -21,13 +21,13 @@ if (Version::MAJOR_VERSION <= 3)
 {
 	\JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
 	\JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
-	\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\Form\\Field\\FilePickerField', '5.0');
 }
 else
 {
 	\JLoader::registerNamespace('Obix', JPATH_LIBRARIES .  '/Obix');
 	\JLoader::registerAlias('FieldsPlugin','Joomla\\Component\\Fields\\Administrator\\Plugin\\FieldsPlugin', '5.0');
 }
+\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\Form\\Field\\FilePickerField', '5.0');
 
 class PlgFieldsFilepicker extends FieldsPlugin
 {
