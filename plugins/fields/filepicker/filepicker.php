@@ -10,17 +10,26 @@
  */
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Version;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Obix\Filesystem\Folder\Scanner\Scanner;
 use Obix\Filesystem\Folder\Scanner\ScannerConfig;
 use Obix\Filesystem\Folder\Scanner\Acceptor\FilepickerAcceptor;
 
-\JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
-\JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
-\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\Form\\Field\\FilePickerField', '5.0');
+if (Version::MAJOR_VERSION <= 3)
+{
+	\JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
+	\JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
+	\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\Form\\Field\\FilePickerField', '5.0');
+}
+else
+{
+	\JLoader::registerNamespace('Obix', JPATH_LIBRARIES .  '/Obix');
+	\JLoader::registerAlias('FieldsPlugin','Joomla\\Component\\Fields\\Administrator\\Plugin\\FieldsPlugin', '5.0');
+}
 
-class PlgFieldsFilepicker extends \FieldsPlugin
+class PlgFieldsFilepicker extends FieldsPlugin
 {
 	public function __construct(&$subject, $config = [])
 	{

@@ -7,6 +7,7 @@
  * @license     A "Slug" license name e.g. GPL2
  */
 
+use Joomla\CMS\Version;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
@@ -16,18 +17,32 @@ $id     = $displayData['id'];
 $name   = $displayData['name'];
 $config = $displayData['config'];
 
-HTMLHelper::_(
-	'stylesheet', 'plg_fields_filepicker/default.min.css',
-	['version' => 'auto', 'relative' => true]
-);
-HTMLHelper::_(
-	'script', 'https://unpkg.com/petite-vue',
-	['version' => 'auto', 'relative' => false]
-);
-HTMLHelper::_(
-	'script', 'plg_fields_filepicker/filepicker.min.js',
-	['version' => 'auto', 'relative' => true]
-);
+if (Version::MAJOR_VERSION <= 3)
+{
+	HTMLHelper::_(
+		'stylesheet', 'plg_fields_filepicker/default.min.css',
+		['version' => 'auto', 'relative' => true]
+	);
+	HTMLHelper::_(
+		'script', 'https://unpkg.com/petite-vue',
+		['version' => 'auto', 'relative' => false]
+	);
+	HTMLHelper::_(
+		'script', 'plg_fields_filepicker/filepicker.min.js',
+		['version' => 'auto', 'relative' => true]
+	);
+}
+else
+{
+	$wa = Factory::getDocument()->getWebAssetManager();
+	$wa
+		->registerAndUseStyle('plg_fields_filepicker.default', 'plg_fields_filepicker/default.min.css')
+		->registerAndUseScript(
+			'plg_fields_filepicker.filepicker', 'plg_fields_filepicker/filepicker.min.js',
+			['relative' => true, 'version' => 'auto'], [], []
+		)
+		->registerAndUseScript('petite-vue', 'https://unpkg.com/petite-vue', [], ['defer' => true], []);
+}
 
 Factory::getDocument()->addScriptOptions(
 	'filepicker',
@@ -61,7 +76,7 @@ Factory::getDocument()->addScriptOptions(
             <div v-if="entry.type === 'file'" class="fp-entry fp-file-entry"
                  :class="{'fp-selectable': entry.selectable, 'fp-selected': entry.selected}">
                 <span class="fp-icon"></span><span class="fp-label"
-                                                @click="toggleSelect(entry)">{{ entry.name }}</span>
+                                                   @click="toggleSelect(entry)">{{ entry.name }}</span>
             </div>
 
             <div v-if="entry.type === 'folder'" class="fp-entry fp-folder-entry"
@@ -86,7 +101,9 @@ Factory::getDocument()->addScriptOptions(
 </div>
 
 <script>
-    let filepicker = Obix.filepicker(JSON.parse(Joomla.getOptions('filepicker')['<?= $id ?>'].config));
+    document.addEventListener('DOMContentLoaded', event => {
+        let filepicker = Obix.filepicker(JSON.parse(Joomla.getOptions('filepicker')['<?= $id ?>'].config));
 
-    PetiteVue.createApp(filepicker).mount("#filepicker-<?= $id ?>");
+        PetiteVue.createApp(filepicker).mount("#filepicker-<?= $id ?>");
+    });
 </script>
