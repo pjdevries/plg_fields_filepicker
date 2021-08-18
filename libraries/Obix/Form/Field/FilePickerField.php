@@ -316,7 +316,7 @@ class FilePickerField extends FormField
 			$this->mode        = ScannerConfig::modeId(
 				(string) $this->element['mode']
 			);
-			$this->style       = (string) $this->element['style'];
+			$this->style       = (string) $this->element['style'] ?: 'default';
 			$this->showHidden  = $this->parBool('showHidden', 'showHidden');
 			$this->recursive   = $this->parBool('recursive', 'recursive');
 			$this->multiple    = $this->parBool('multiple', 'multiple');
