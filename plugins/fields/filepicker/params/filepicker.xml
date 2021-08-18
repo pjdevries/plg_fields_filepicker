@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Obix File & Folder Picker Form field and Custom field Plugin -->
+<!-- -->
+<!-- Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl> -->
+<!-- Copyright © 2020 Obix webtechniek. All rights reserved. -->
+<!-- License GNU General Public License version 2 or later; see LICENSE.txt -->
+<!-- https://www.obix.nl-->
 <form>
 	<fields name="fieldparams">
 		<fieldset name="fieldparams">
@@ -37,6 +43,16 @@
 				<option value="all">PLG_FIELDS_FILEPICKER_MODE_ALL</option>
 				<option value="files">PLG_FIELDS_FILEPICKER_MODE_FILES</option>
 				<option value="folders">PLG_FIELDS_FILEPICKER_MODE_FOLDERS</option>
+			</field>
+
+			<field name="style"
+				   type="list"
+				   default="default"
+				   label="PLG_FIELDS_FILEPICKER_STYLE_LABEL"
+				   description ="PLG_FIELDS_FILEPICKER_STYLE_DESC"
+			>
+				<option value="default">PLG_FIELDS_FILEPICKER_STYLE_DEFAULT</option>
+				<option value="alternate">PLG_FIELDS_FILEPICKER_STYLE_ALTERNATE</option>
 			</field>
 
 			<field name="showHidden"

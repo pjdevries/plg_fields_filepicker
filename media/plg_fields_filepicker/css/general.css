@@ -1,0 +1,122 @@
+/**
+ * @package    Obix File & Folder Picker Form field and Custom field Plugin
+ *
+ * @author     Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl>
+ * @copyright  Copyright © 2020 Obix webtechniek. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       https://www.obix.nl
+ */
+
+.filepicker *,
+.filepicker *::before,
+.filepicker *::after {
+    box-sizing: inherit;
+}
+
+.filepicker {
+    box-sizing: border-box;
+    color: #555;
+    border: 1px solid #ccc;
+    margin-bottom: 9px;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 4px 6px;
+}
+
+.fp-top {
+    padding: 3px 0;
+    border-bottom: 1px solid gray;
+    display: flex;
+}
+
+.fp-bottom {
+    padding: 3px 0;
+    border-top: 1px solid gray;
+    display: flex;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.fp-path,
+.fp-selected-paths {
+    display: flex;
+    align-items: flex-start;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+}
+
+.fp-selected-paths > li {
+    margin-right: 1.4em;
+}
+
+.fp-entries {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: auto;
+    width: 100%;
+    height: 300px;
+}
+
+.fp-path-segment {
+    cursor: pointer;
+}
+
+.fp-entry .fp-label {
+    position: relative;
+}
+
+.fp-icon {
+    padding-right: 1.8em;
+    margin: 0.25em 0.25em 0.25em 0;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.fp-path .fp-path-segment {
+    cursor: default;
+}
+
+.fp-path .fp-path-segment:not(:last-child):hover {
+    color: red;
+}
+
+.fp-path .fp-navigatable:not(:last-child):hover,
+.fp-selected-paths .fp-selected:hover {
+    color: green;
+    cursor: pointer;
+}
+
+.fp-file-entry-icon {
+    color: black;
+    background-image: url(../images/file-regular.svg);
+}
+
+.fp-folder-entry-icon {
+    background-image: url(../images/folder-solid.svg);
+    cursor: pointer;
+}
+
+.fp-folder-exit-icon {
+    background-image: url(../images/level-up-alt.svg);
+    cursor: pointer;
+}
+
+.fp-entry {
+    display:flex;
+    flex-direction: row-reverse;
+}
+
+.fp-entry .fp-icon {
+    order: 3;
+}
+
+.fp-check-icon {
+    order: 2;
+}
+
+.fp-entry .fp-label {
+    order: 1;
+}

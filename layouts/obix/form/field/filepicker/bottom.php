@@ -10,24 +10,11 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-
-/** @var \stdClass $field */
-$fieldValues = array_filter((array) $field->value ?: [], 'strlen');
-
-if (!count($fieldValues))
-{
-	return;
-}
-
-if (count($fieldValues) === 1) : ?>
-    <span class="field-value"><?php echo $fieldValues[0]; ?></span>
-	<?php return;
-endif; ?>
-
-<ul>
-	<?php foreach ($fieldValues as $value) : ?>
-        <li><?= $value ?></li>
-	<?php endforeach; ?>
-</ul>
+?>
+<div class="fp-bottom" :class="{'fp-one': selectedPaths.length  === 1, 'fp-more': selectedPaths.length  > 1}">
+    <span class="fp-bottom-label">{{ selectedPaths.length }} <?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span>
+    <ul class="fp-selected-paths">
+        <li v-for="(path, index) in selectedPaths" @click="goToSelected(index)" class="fp-selected">{{ path }}</li>
+    </ul>
+</div>

@@ -1,3 +1,12 @@
+/**
+ * @package    Obix File & Folder Picker Form field and Custom field Plugin
+ *
+ * @author     Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl>
+ * @copyright  Copyright © 2020 Obix webtechniek. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       https://www.obix.nl
+ */
+
 'use strict';
 
 var Obix = Obix || {};
@@ -150,32 +159,48 @@ Obix.text = Obix.text || {
         return responseData;
     };
 
-    O.filepicker = function (config) {
+    O.filePicker = function (config) {
         return {
             folder: new Folder(config.baseDir),
+            baseDirPath: new Path(config.baseDir),
             selectedPaths: [],
             config: config,
+
             async init() {
                 this.selectedPaths = config.selected;
                 await this.load(config.baseDir);
             },
+
             isBase() {
                 return this.folder.path === config.baseDir;
             },
+
             async enterFolder(entry) {
                 await this.load(entry.path);
             },
+
             async exitFolder() {
                 await this.load(this.folder.dirname);
             },
+
             async goToRoot() {
                 await this.load('/');
             },
+
+            isCurrent(pathSegmentIndex) {
+                return pathSegmentIndex === this.baseDirPath.segments().length - 1;
+            },
+
+            isNavigatable(pathSegmentIndex) {
+                return pathSegmentIndex > this.baseDirPath.segments().length - 2;
+            },
+
             async goToFolder(folderPathSegmentIndex) {
                 const path = '/' + this.folder.pathSegments().slice(0, folderPathSegmentIndex + 1).join('/');
 
                 await this.load(path);
             },
+
             toggleSelect(entry) {
                 if (!(config.mode === 'all'
                     || (config.mode === 'files' && entry.type === 'file')
@@ -226,6 +251,7 @@ Obix.text = Obix.text || {
 
                 this.selectedPaths.sort(this.filesFirstPathSorter());
             },
+
             filesFirstPathSorter(reversed = false) {
                 return (s1, s2) => {
                     const segmentCount1 = s1.split('/').length;
@@ -235,14 +261,16 @@ Obix.text = Obix.text || {
                         return segmentCount1 < segmentCount2 ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
                     }
 
-                    return s1.path.toLowerCase() < s2.path.toLowerCase() ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
+                    return s1.toLowerCase() < s2.toLowerCase() ? (reversed ? -1 : 1) : (reversed ? 1 : -1);
                 }
             },
+
             async goToSelected(selectedPathIndex) {
                 const path = (new Path(this.selectedPaths[selectedPathIndex])).dirname;
 
                 await this.load(path);
             },
+
             async load(path) {
                 let response = await fetchEntries(config, path);
 

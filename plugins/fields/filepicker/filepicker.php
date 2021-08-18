@@ -1,13 +1,13 @@
 <?php
 /**
- * @package        ${PACKAGE_NAME}
+ * @package    Obix File & Folder Picker Form field and Custom field Plugin
  *
- * @author         Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl>
- * @link           www.obix.nl
- * @date           5-12-2019
- * @copyright  (C) 2019, Obix webtechniek. All rights reserved.
- * @license        GNU General Public License version 2 or later; see LICENSE.txt
+ * @author     Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl>
+ * @copyright  Copyright © 2020 Obix webtechniek. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       https://www.obix.nl
  */
+
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Version;
@@ -54,6 +54,7 @@ class PlgFieldsFilepicker extends FieldsPlugin
 
 		$fieldNode->setAttribute('directory', ((array)$field->fieldparams->get('baseDir', '/'))[0]);
 		$fieldNode->setAttribute('mode', $field->fieldparams->get('mode', 'all'));
+		$fieldNode->setAttribute('style', $field->fieldparams->get('style', 'default'));
 		$fieldNode->setAttribute('showHidden', $field->fieldparams->get('showHidden', '0'));
 		$fieldNode->setAttribute('recursive', $field->fieldparams->get('recursive', '1'));
 		$fieldNode->setAttribute('multiple', $field->fieldparams->get('multiple', '0'));

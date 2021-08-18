@@ -1,11 +1,11 @@
 <?php
 /**
- * @package     Joomla.Platform
- * @subpackage  Form
+ * @package    Obix Library
  *
- * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights
- *              reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE
+ * @author     Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl>
+ * @copyright  Copyright © 2020 Obix webtechniek. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       https://www.obix.nl
  */
 
 namespace Obix\Form\Field;
@@ -101,6 +101,8 @@ class FilePickerField extends FormField
 
 	protected $mode = ScannerConfig::MODE_FILES;
 
+	protected $style = 'default';
+
 	protected $showHidden = false;
 
 	protected $multiple;
@@ -128,11 +130,12 @@ class FilePickerField extends FormField
 	protected function getInput(): string
 	{
 		$displayData = [
-			'id'            => $this->id,
-			'name'          => $this->name,
-			'fieldname'     => $this->fieldname,
-			'group'         => $this->group,
-			'config'        => [
+			'id'        => $this->id,
+			'name'      => $this->name,
+			'style'     => $this->style,
+			'fieldname' => $this->fieldname,
+			'group'     => $this->group,
+			'config'    => [
 				'baseDir'        => $this->directory,
 				'multiple'       => $this->multiple,
 				'recursive'      => $this->recursive,
@@ -203,6 +206,7 @@ class FilePickerField extends FormField
 		case 'hideDefault':
 		case 'directory':
 		case 'mode':
+		case 'style':
 		case 'showHidden':
 		case 'multiple':
 		case 'secure':
@@ -228,6 +232,7 @@ class FilePickerField extends FormField
 	{
 		switch ($name)
 		{
+		case 'style':
 		case 'include':
 		case 'includeFiles':
 		case 'includeFolders':
@@ -293,28 +298,29 @@ class FilePickerField extends FormField
 
 		if ($return)
 		{
-			$this->include = (string) $this->element['include'];
-			$this->includeFiles = (string) $this->element['includeFiles'];
+			$this->include        = (string) $this->element['include'];
+			$this->includeFiles   = (string) $this->element['includeFiles'];
 			$this->includeFolders = (string) $this->element['includeFolders'];
-			$this->exclude = (string) $this->element['exclude'];
-			$this->excludeFiles = (string) $this->element['excludeFiles'];
+			$this->exclude        = (string) $this->element['exclude'];
+			$this->excludeFiles   = (string) $this->element['excludeFiles'];
 			$this->excludeFolders = (string) $this->element['excludeFolders'];
 			if (!empty($ignore = (string) $this->element['ignore']))
 			{
 				$this->ignore = explode(',', $ignore);
 			}
-			$this->hideNone      = $this->parBool('hide_none', 'hideNone');
-			$this->hideDefault   = $this->parBool(
+			$this->hideNone    = $this->parBool('hide_none', 'hideNone');
+			$this->hideDefault = $this->parBool(
 				'hide_default', 'hideDefault'
 			);
-			$this->directory     = (string) $this->element['directory'];
-			$this->mode          = ScannerConfig::modeId(
+			$this->directory   = (string) $this->element['directory'];
+			$this->mode        = ScannerConfig::modeId(
 				(string) $this->element['mode']
 			);
-			$this->showHidden    = $this->parBool('showHidden', 'showHidden');
-			$this->recursive     = $this->parBool('recursive', 'recursive');
-			$this->multiple      = $this->parBool('multiple', 'multiple');
-			$this->secure        = $this->parBool('secure', 'secure');
+			$this->style       = (string) $this->element['style'];
+			$this->showHidden  = $this->parBool('showHidden', 'showHidden');
+			$this->recursive   = $this->parBool('recursive', 'recursive');
+			$this->multiple    = $this->parBool('multiple', 'multiple');
+			$this->secure      = $this->parBool('secure', 'secure');
 		}
 
 		return $return;

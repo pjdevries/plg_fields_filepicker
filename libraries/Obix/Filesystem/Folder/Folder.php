@@ -1,13 +1,16 @@
 <?php
 /**
- * @package     Filepicker
- * @subpackage
+ * @package    Obix Library
  *
- * @copyright   A copyright
- * @license     A "Slug" license name e.g. GPL2
+ * @author     Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl>
+ * @copyright  Copyright © 2020 Obix webtechniek. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       https://www.obix.nl
  */
 
 namespace Obix\Filesystem\Folder;
+
+defined('_JEXEC') or die;
 
 class Folder extends Entry
 {

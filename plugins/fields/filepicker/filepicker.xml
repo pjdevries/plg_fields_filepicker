@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Obix File & Folder Picker Form field and Custom field Plugin -->
+<!-- -->
+<!-- Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl> -->
+<!-- Copyright © 2020 Obix webtechniek. All rights reserved. -->
+<!-- License GNU General Public License version 2 or later; see LICENSE.txt -->
+<!-- https://www.obix.nl-->
 <extension type="plugin" group="fields" method="upgrade">
     <name>PLG_FIELDS_FILEPICKER</name>
     <creationDate>2021-06-08</creationDate>

@@ -1,0 +1,45 @@
+.fp-entry .fp-label:hover {
+    color: red;
+    cursor: default;
+}
+
+.fp-entry .fp-label:hover:after {
+    content: "";
+    line-height: 1.2;
+    padding-left: 1.5em;
+    margin: 0.25em;
+    background-position: top 1px right 4px;
+    background-size: 1em 1em;
+    background-color: red;
+    mask: url(../images/ban-solid.svg) no-repeat;
+    -webkit-mask: url(../images/ban-solid.svg) no-repeat;
+}
+
+.fp-selectable .fp-label:hover {
+    color: green;
+    cursor: pointer;
+}
+
+.fp-selectable .fp-label:hover:after {
+    background-color: green;
+    mask: url(../images/plus-solid.svg) no-repeat;
+    -webkit-mask: url(../images/plus-solid.svg) no-repeat;
+}
+
+.fp-selectable.fp-selected .fp-label:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+.fp-selectable.fp-selected .fp-label:hover:after {
+    background-color: orange;
+    -webkit-mask: url(../images/minus-solid.svg) no-repeat;
+}
+
+.fp-entry.fp-selected {
+    color: blue;
+}
+
+.fp-folder-entry-icon:hover {
+    background-image: url(../images/folder-open-solid.svg);
+}
