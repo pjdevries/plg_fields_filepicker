@@ -27,7 +27,7 @@ else
 	\JLoader::registerNamespace('Obix', JPATH_LIBRARIES .  '/Obix');
 	\JLoader::registerAlias('FieldsPlugin','Joomla\\Component\\Fields\\Administrator\\Plugin\\FieldsPlugin', '5.0');
 }
-\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\Form\\Field\\FilePickerField', '5.0');
+\JLoader::registerAlias('JFormFieldFilePicker','\\Obix\\FilePicker\\Form\\Field\\FilePickerField', '5.0');
 
 class PlgFieldsFilepicker extends FieldsPlugin
 {
@@ -56,7 +56,6 @@ class PlgFieldsFilepicker extends FieldsPlugin
 		$fieldNode->setAttribute('mode', $field->fieldparams->get('mode', 'all'));
 		$fieldNode->setAttribute('style', $field->fieldparams->get('style', 'default'));
 		$fieldNode->setAttribute('showHidden', $field->fieldparams->get('showHidden', '0'));
-		$fieldNode->setAttribute('recursive', $field->fieldparams->get('recursive', '1'));
 		$fieldNode->setAttribute('multiple', $field->fieldparams->get('multiple', '0'));
 		$fieldNode->setAttribute('include', $field->fieldparams->get('include', 0));
 		$fieldNode->setAttribute('includeFiles', $field->fieldparams->get('includeFiles', ''));

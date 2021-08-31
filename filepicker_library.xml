@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Obix FilePicker Support Library -->
+<!-- -->
+<!-- Pieter-Jan de Vries/Obix webtechniek <pieter@obix.nl> -->
+<!-- Copyright © 2020 Obix webtechniek. All rights reserved. -->
+<!-- License GNU General Public License version 2 or later; see LICENSE.txt -->
+<!-- https://www.obix.nl-->
+<extension type="library" method="upgrade">
+    <name>Obix FilePicker library</name>
+    <libraryname>Obix/FilePicker</libraryname>
+    <creationDate>2021-06-08</creationDate>
+    <author>Pieter-Jan de Vries/Obix webtechniek</author>
+    <authorEmail>pieter@obix.nl</authorEmail>
+    <authorUrl>https://www.obix.nl</authorUrl>
+    <copyright>(C) Obix webtechniek</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <version>1.0.0</version>
+    <description>Obix Joomla! Extension Support Library</description>
+
+    <!-- Library files -->
+    <files folder="libraries/Obix/FilePicker">
+        <folder>Form</folder>
+    </files>
+</extension>

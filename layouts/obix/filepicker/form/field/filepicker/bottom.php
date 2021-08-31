@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 ?>
+
 <div class="fp-bottom" :class="{'fp-one': selectedPaths.length  === 1, 'fp-more': selectedPaths.length  > 1}">
     <span class="fp-bottom-label">{{ selectedPaths.length }} <?= Text::_('PLG_FIELD_FILEPICKER_SELECTED') ?></span>
     <ul class="fp-selected-paths">

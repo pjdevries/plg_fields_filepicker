@@ -10,9 +10,6 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\Language\Text;
-
 /** @var \stdClass $field */
 $fieldValues = array_filter((array) $field->value ?: [], 'strlen');
 

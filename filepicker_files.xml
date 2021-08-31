@@ -11,50 +11,15 @@
     <description>Required files for Obix File &amp; Folder Picker Form field and Custom field plugin.</description>
 
     <fileset>
-        <files folder="layouts/obix/form/field" target="layouts/obix/form/field">
+        <files folder="layouts/obix/filepicker/form/field" target="layouts/obix/filepicker/form/field">
             <file>filepicker.php</file>
         </files>
 
-        <files folder="libraries/Obix/Filesystem/Folder" target="libraries/Obix/Filesystem/Folder">
-            <file>Entry.php</file>
-            <file>File.php</file>
-            <file>Folder.php</file>
-            <file>Helper.php</file>
-        </files>
-        <files folder="libraries/Obix/Filesystem/Folder/Scanner" target="libraries/Obix/Filesystem/Folder/Scanner">
-            <file>Scanner.php</file>
-            <file>ScannerConfig.php</file>
-            <file>ScannerFilterIterator.php</file>
-        </files>
-        <files folder="libraries/Obix/Filesystem/Folder/Scanner/Acceptor" target="libraries/Obix/Filesystem/Folder/Scanner/Acceptor">
-            <file>FilepickerAcceptor.php</file>
-            <file>ScannerFilterAcceptor.php</file>
-        </files>
-        <files folder="libraries/Obix/Form/Field" target="libraries/Obix/Form/Field">
-            <file>FilePickerField.php</file>
-        </files>
-
-        <files folder="media/plg_fields_filepicker/css" target="media/plg_fields_filepicker/css">
-            <file>default.css</file>
-            <file>default.min.css</file>
-        </files>
-        <files folder="media/plg_fields_filepicker/images" target="media/plg_fields_filepicker/images">
-            <file>ban-solid.svg</file>
-            <file>file-regular.svg</file>
-            <file>file-solid.svg</file>
-            <file>folder-open.svg</file>
-            <file>folder-open-regular.svg</file>
-            <file>folder-open-solid.svg</file>
-            <file>folder-regular.svg</file>
-            <file>folder-solid.svg</file>
-            <file>level-down-alt.svg</file>
-            <file>level-up-alt.svg</file>
-            <file>minus-solid.svg</file>
-            <file>plus-solid.svg</file>
-        </files>
-        <files folder="media/plg_fields_filepicker/js" target="media/plg_fields_filepicker/js">
-            <file>filepicker.js</file>
-            <file>filepicker.min.js</file>
+        <files folder="layouts/obix/filepicker/form/field/filepicker" target="layouts/obix/filepicker/form/field/filepicker">
+            <file>bottom.php</file>
+            <file>entries_alternate.php</file>
+            <file>entries_default.php</file>
+            <file>top.php</file>
         </files>
     </fileset>
 </extension>

@@ -11,8 +11,8 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
-
 ?>
+
 <div class="fp-top">
     <span class="fp-top-label"><?= Text::_('PLG_FIELD_FILEPICKER_CURRENT_FOLDER') ?></span>
 

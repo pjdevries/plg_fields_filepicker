@@ -9,43 +9,56 @@
 
 'use strict';
 
+// Setup Obix namespace.
 var Obix = Obix || {};
 
+// Translatable text shorthand.
 Obix.text = Obix.text || {
     _: t => typeof Joomla === 'undefined' ? t : Joomla.JText._(t)
 };
 
+// Contain all code in Obix namespace.
 (function (O) {
+    // Basic path manipulation functionality.
     class Path {
         constructor(path) {
             this.path = path;
         }
 
+        // Returns an array of path segments.
         segments() {
             const trimmed = this.path.replace(/^[\\\/]|[\\\/]$/, '');
 
             return trimmed === '' ? [] : trimmed.split('/');
         }
 
+        // Returns trailing name of path
         get basename() {
             return this.path.split('/').pop();
         }
 
+        // Returns parent directory's path.
         get dirname() {
             return '/' + this.segments().slice(0, -1).join('/');
         }
     }
 
+    // Filesystem entry, which can represent a file or folder.
     class Entry {
         constructor(type, path = '', ...more) {
+            // Entry type: 'file' or 'folder'.
             this.type = type;
+            // Path object.
             this._path = new Path(path);
+            // Whether the entry is selectable.
             this.selectable = false;
+            // Whether the entry is selected.
             this.selected = false;
 
             Object.assign(this, more);
         }
 
+        // Returns a new Entry object from Ajax response data.
         static fromResponseData(entryData) {
             const entry = entryData.type === 'file'
                 ? new File(entryData.path, entryData)
@@ -79,34 +92,33 @@ Obix.text = Obix.text || {
         }
     }
 
+    // File entry.
     class File extends Entry {
         constructor(path, ...more) {
             super('file', path);
-
-            this.size = 0;
 
             Object.assign(this, more);
         }
     }
 
+    // Folder entry.
     class Folder extends Entry {
         constructor(path, entries = [], ...more) {
             super('folder', path);
 
+            // Array of folder entries, i.e. File and/or Fodler objects.
             this.entries = entries;
-            this.expanded = false;
-            this.childCount = 0;
-            this.treeChildCount = 0;
-            this.selectCount = 0;
-            this.treeSelectCount = 0;
 
             Object.assign(this, more);
         }
 
+        // Returns sorted array of folder entries.
         sorted() {
             return this.entries.sort(this.foldersFirstEntrySorter());
         }
 
+        // Method to sort entries with folders first, files next, both
+        // sorted alphabetically.
         foldersFirstEntrySorter(reversed = false) {
             return (e1, e2) => {
                 if (e1.type !== e2.type) {
@@ -117,6 +129,7 @@ Obix.text = Obix.text || {
             }
         }
 
+        // Deselect a folder entry.
         unselect(path) {
             const entry = this.entries.find(entry => entry.path === path);
 
@@ -126,6 +139,7 @@ Obix.text = Obix.text || {
         }
     }
 
+    // Fetch entries for a specific folder from the host.
     const fetchEntries = async function (config, folderPath) {
         const data = {
             option: 'com_ajax',
@@ -159,6 +173,7 @@ Obix.text = Obix.text || {
         return responseData;
     };
 
+    // Creates a FilePicker component.
     O.filePicker = function (config) {
         return {
             folder: new Folder(config.baseDir),
@@ -166,41 +181,60 @@ Obix.text = Obix.text || {
             selectedPaths: [],
             config: config,
 
+            // Initialise the component and load entries for base folder.
             async init() {
                 this.selectedPaths = config.selected;
                 await this.load(config.baseDir);
             },
 
+            // Check if current folder is the base folder.
             isBase() {
                 return this.folder.path === config.baseDir;
             },
 
+            // Navigate into a folder after clicking on it in the folder entries area.
             async enterFolder(entry) {
                 await this.load(entry.path);
             },
 
+            // Leave current folder.
             async exitFolder() {
                 await this.load(this.folder.dirname);
             },
 
+            // Navigate to base folder.
             async goToRoot() {
                 await this.load('/');
             },
 
+            // Determine if a path segment represents the current folder.
             isCurrent(pathSegmentIndex) {
                 return pathSegmentIndex === this.baseDirPath.segments().length - 1;
             },
 
+            // Determine is a path segment can be navigated to.
+            // Navigation higher up the base folder is not allowed.
             isNavigatable(pathSegmentIndex) {
                 return pathSegmentIndex > this.baseDirPath.segments().length - 2;
             },
 
+            // Navigate to folder after clicking on a current path segment
+            // in the top bar.
             async goToFolder(folderPathSegmentIndex) {
                 const path = '/' + this.folder.pathSegments().slice(0, folderPathSegmentIndex + 1).join('/');
 
                 await this.load(path);
             },
 
+            // Navigate to folder after clicking on a selected entry
+            // in the bottom bar.
+            async goToSelected(selectedPathIndex) {
+                const path = (new Path(this.selectedPaths[selectedPathIndex])).dirname;
+
+                await this.load(path);
+            },
+
+            // Toggle entry selection.
             toggleSelect(entry) {
                 if (!(config.mode === 'all'
                     || (config.mode === 'files' && entry.type === 'file')
@@ -252,6 +286,8 @@ Obix.text = Obix.text || {
                 this.selectedPaths.sort(this.filesFirstPathSorter());
             },
 
+            // Method to sort path segments with files first, folders next, both
+            // sorted alphabetically.
             filesFirstPathSorter(reversed = false) {
                 return (s1, s2) => {
                     const segmentCount1 = s1.split('/').length;
@@ -265,12 +301,7 @@ Obix.text = Obix.text || {
                 }
             },
 
-            async goToSelected(selectedPathIndex) {
-                const path = (new Path(this.selectedPaths[selectedPathIndex])).dirname;
-
-                await this.load(path);
-            },
-
+            // Load folder entries based on a path.
             async load(path) {
                 let response = await fetchEntries(config, path);
 

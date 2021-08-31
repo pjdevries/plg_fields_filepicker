@@ -6,139 +6,140 @@
 <!-- License GNU General Public License version 2 or later; see LICENSE.txt -->
 <!-- https://www.obix.nl-->
 <form>
-	<fields name="fieldparams">
-		<fieldset name="fieldparams">
-			<field name="baseDir"
-				   type="filepicker"
-				   label="PLG_FIELDS_FILEPICKER_BASE_DIR_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_BASE_DIR_DESC"
-				   directory="/"
-				   mode="folders"
-				   showHidden="false"
-				   multiple="false"
-				   exclude="false"
-				   include="false"
-				   ignore="false"
-			/>
+    <fields name="fieldparams">
+        <fieldset name="fieldparams">
+            <field name="baseDir"
+                   type="filepicker"
+                   label="PLG_FIELDS_FILEPICKER_BASE_DIR_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_BASE_DIR_DESC"
+                   directory="/"
+                   mode="folders"
+                   style="default"
+                   showHidden="false"
+                   multiple="false"
+                   exclude="false"
+                   include="false"
+                   ignore="false"
+            />
 
-			<field name="secure"
-				   type="radio"
-				   label="PLG_FIELDS_FILEPICKER_SECURE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_SECURE_DESC"
-				   default="1"
-				   class="btn-group btn-group-yesno"
-				   filter="integer"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
+            <field name="secure"
+                   type="radio"
+                   label="PLG_FIELDS_FILEPICKER_SECURE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_SECURE_DESC"
+                   default="1"
+                   class="btn-group btn-group-yesno"
+                   filter="integer"
+            >
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
 
-			<field name="mode"
-				   type="list"
-				   default="folders"
-				   multiple="false"
-				   label="PLG_FIELDS_FILEPICKER_MODE_LABEL"
-				   description ="PLG_FIELDS_FILEPICKER_MODE_DESC"
-			>
-				<option value="all">PLG_FIELDS_FILEPICKER_MODE_ALL</option>
-				<option value="files">PLG_FIELDS_FILEPICKER_MODE_FILES</option>
-				<option value="folders">PLG_FIELDS_FILEPICKER_MODE_FOLDERS</option>
-			</field>
+            <field name="mode"
+                   type="list"
+                   default="folders"
+                   multiple="false"
+                   label="PLG_FIELDS_FILEPICKER_MODE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_MODE_DESC"
+            >
+                <option value="all">PLG_FIELDS_FILEPICKER_MODE_ALL</option>
+                <option value="files">PLG_FIELDS_FILEPICKER_MODE_FILES</option>
+                <option value="folders">PLG_FIELDS_FILEPICKER_MODE_FOLDERS</option>
+            </field>
 
-			<field name="style"
-				   type="list"
-				   default="default"
-				   label="PLG_FIELDS_FILEPICKER_STYLE_LABEL"
-				   description ="PLG_FIELDS_FILEPICKER_STYLE_DESC"
-			>
-				<option value="default">PLG_FIELDS_FILEPICKER_STYLE_DEFAULT</option>
-				<option value="alternate">PLG_FIELDS_FILEPICKER_STYLE_ALTERNATE</option>
-			</field>
+            <field name="style"
+                   type="list"
+                   default="default"
+                   label="PLG_FIELDS_FILEPICKER_STYLE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_STYLE_DESC"
+            >
+                <option value="default">PLG_FIELDS_FILEPICKER_STYLE_DEFAULT</option>
+                <option value="alternate">PLG_FIELDS_FILEPICKER_STYLE_ALTERNATE</option>
+            </field>
 
-			<field name="showHidden"
-				   type="radio"
-				   label="PLG_FIELDS_FILEPICKER_SHOW_HIDDEN_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_SHOW_HIDDEN_DESC"
-				   default="0"
-				   class="btn-group btn-group-yesno"
-				   filter="integer"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
+            <field name="showHidden"
+                   type="radio"
+                   label="PLG_FIELDS_FILEPICKER_SHOW_HIDDEN_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_SHOW_HIDDEN_DESC"
+                   default="0"
+                   class="btn-group btn-group-yesno"
+                   filter="integer"
+            >
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
 
-			<field name="multiple"
-				   type="radio"
-				   label="PLG_FIELDS_FILEPICKER_MULTIPLE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_MULTIPLE_DESC"
-				   default="0"
-				   class="btn-group btn-group-yesno"
-				   filter="integer"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
+            <field name="multiple"
+                   type="radio"
+                   label="PLG_FIELDS_FILEPICKER_MULTIPLE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_MULTIPLE_DESC"
+                   default="0"
+                   class="btn-group btn-group-yesno"
+                   filter="integer"
+            >
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
 
-			<field name="include"
-				   type="radio"
-				   default="0"
-				   label="PLG_FIELDS_FILEPICKER_INCLUDE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_INCLUDE_DESC"
-				   class="btn-group btn-group-yesno"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
+            <field name="include"
+                   type="radio"
+                   default="0"
+                   label="PLG_FIELDS_FILEPICKER_INCLUDE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_INCLUDE_DESC"
+                   class="btn-group btn-group-yesno"
+            >
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
 
-			<field name="includeFiles"
-				   type="text"
-				   default=""
-				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_DESC"
-				   showon="include:1[AND]mode:all,files"
-			/>
+            <field name="includeFiles"
+                   type="text"
+                   default=""
+                   label="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_INCLUDE_FILES_DESC"
+                   showon="include:1[AND]mode:all,files"
+            />
 
-			<field name="includeFolders"
-				   type="text"
-				   default=""
-				   label="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_DESC"
-				   showon="include:1"
-			/>
+            <field name="includeFolders"
+                   type="text"
+                   default=""
+                   label="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_INCLUDE_FOLDERS_DESC"
+                   showon="include:1"
+            />
 
-			<field name="exclude"
-				   type="radio"
-				   default="0"
-				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_DESC"
-				   class="btn-group btn-group-yesno"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
+            <field name="exclude"
+                   type="radio"
+                   default="0"
+                   label="PLG_FIELDS_FILEPICKER_EXCLUDE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_EXCLUDE_DESC"
+                   class="btn-group btn-group-yesno"
+            >
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
 
-			<field name="excludeFiles"
-				   type="text"
-				   default=""
-				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_DESC"
-				   showon="exclude:1[AND]mode:all,files"
-			/>
+            <field name="excludeFiles"
+                   type="text"
+                   default=""
+                   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FILES_DESC"
+                   showon="exclude:1[AND]mode:all,files"
+            />
 
-			<field name="excludeFolders"
-				   type="text"
-				   default=""
-				   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_DESC"
-				   showon="exclude:1"
-			/>
+            <field name="excludeFolders"
+                   type="text"
+                   default=""
+                   label="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_EXCLUDE_FOLDERS_DESC"
+                   showon="exclude:1"
+            />
 
-			<field name="ignore"
-				   type="textarea"
-				   label="PLG_FIELDS_FILEPICKER_IGNORE_LABEL"
-				   description="PLG_FIELDS_FILEPICKER_IGNORE_DESC"
-				   default="CVS,.svn,.git,.idea,.DS_Store,__MACOSX"
-			/>
-		</fieldset>
-	</fields>
+            <field name="ignore"
+                   type="textarea"
+                   label="PLG_FIELDS_FILEPICKER_IGNORE_LABEL"
+                   description="PLG_FIELDS_FILEPICKER_IGNORE_DESC"
+                   default="CVS,.svn,.git,.idea,.DS_Store,__MACOSX"
+            />
+        </fieldset>
+    </fields>
 </form>

@@ -10,33 +10,33 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\LayoutHelper;
 
 /** @var array $displayData */
 $id     = $displayData['id'];
 $name   = $displayData['name'];
 $config = $displayData['config'];
-$style = $displayData['style'] ?? 'default';
+$style  = $displayData['style'] ?? 'default';
 
-$styleSheet = $style . '.min.css';
+$styleSheet    = $style . '.min.css';
 $entriesLayout = 'entries_' . $style;
 
 HTMLHelper::_(
-    'stylesheet', 'plg_fields_filepicker/general.min.css',
-    ['version' => 'auto', 'relative' => true]
+	'stylesheet', 'plg_fields_filepicker/general.min.css',
+	['version' => 'auto', 'relative' => true]
 );
 HTMLHelper::_(
-    'stylesheet', 'plg_fields_filepicker/' . $styleSheet,
-    ['version' => 'auto', 'relative' => true]
+	'stylesheet', 'plg_fields_filepicker/' . $styleSheet,
+	['version' => 'auto', 'relative' => true]
 );
 HTMLHelper::_(
-    'script', 'https://unpkg.com/petite-vue', [], ['defer' => true]
+	'script', 'https://unpkg.com/petite-vue', [], ['defer' => true]
 );
 HTMLHelper::_(
-    'script', 'plg_fields_filepicker/filepicker.min.js',
-    ['version' => 'auto', 'relative' => true]
+	'script', 'plg_fields_filepicker/filepicker.min.js',
+	['version' => 'auto', 'relative' => true]
 );
 
 Factory::getDocument()->addScriptOptions(
@@ -50,11 +50,11 @@ Factory::getDocument()->addScriptOptions(
 ?>
 
 <div id="filepicker-<?= $id ?>" class="filepicker" @mounted="init()">
-	<?php echo LayoutHelper::render('obix.form.field.filepicker.top', $displayData); ?>
+	<?php echo LayoutHelper::render('obix.filepicker.form.field.filepicker.top', $displayData); ?>
 
-	<?php echo LayoutHelper::render('obix.form.field.filepicker.' . $entriesLayout, $displayData); ?>
+	<?php echo LayoutHelper::render('obix.filepicker.form.field.filepicker.' . $entriesLayout, $displayData); ?>
 
-	<?php echo LayoutHelper::render('obix.form.field.filepicker.bottom', $displayData); ?>
+	<?php echo LayoutHelper::render('obix.filepicker.form.field.filepicker.bottom', $displayData); ?>
 
     <input v-for="path in selectedPaths" type="hidden" id="<?= $id ?>" name="<?= $name ?>"
            :value="path">

@@ -27,6 +27,13 @@
         <folder>tmpl</folder>
     </files>
 
+    <!-- Media files -->
+    <media folder="media" destination="plg_fields_filepicker">
+        <folder>css</folder>
+        <folder>images</folder>
+        <folder>js</folder>
+    </media>
+
     <config>
         <fields name="params">
             <fieldset name="basic" addfieldpath="/plugins/fields/filepicker/fields">

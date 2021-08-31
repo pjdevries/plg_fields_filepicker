@@ -33,8 +33,20 @@ ignore
 
 Path: absolute (leading slash), relative to website root.
 
+Differences with core Filelist and Folderlist
+- Allows to navigate between folders.
+- In- and exclude folders and files separately.
+- Select multiple.
+- No 'stripext'.
+
+Differences with core Folderlist
+
 ## Custom field
 
 https://docs.joomla.org/J3.x:Adding_custom_fields
 https://docs.joomla.org/J3.x:Adding_custom_fields/Parameters_for_all_Custom_Fields
 https://docs.joomla.org/J3.x:Adding_custom_fields/Overrides
+
+## Minimal requirements
+Joomla! 3.9 or 4.0
+PHP 7.4

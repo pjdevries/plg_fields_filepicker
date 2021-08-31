@@ -8,12 +8,11 @@
  * @link       https://www.obix.nl
  */
 
-namespace Obix\Form\Field;
+namespace Obix\FilePicker\Form\Field;
 
 defined('JPATH_PLATFORM') or die;
 
 use Joomla\CMS\Form\FormField;
-use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
@@ -22,6 +21,9 @@ use Obix\Filesystem\Folder\Scanner\ScannerConfig;
 
 \JLoader::registerNamespace('Obix', JPATH_LIBRARIES);
 
+/**
+ * Implements a Joomla! form field to select files and/or folders from the host's file system.
+ */
 class FilePickerField extends FormField
 {
 
@@ -34,29 +36,55 @@ class FilePickerField extends FormField
 	protected $type = 'FilePicker';
 
 	/**
-	 * The filter.
+	 * Setting to include only specific files or folders.
 	 *
 	 * @var    string
 	 * @since  3.2
 	 */
 	protected $include = '';
 
+	/**
+	 * Regex pattern for inclusion of files.
+	 *
+	 * @var string
+	 */
 	protected $includeFiles = '';
 
+	/**
+	 * Regex pattern for inclusion of folders.
+	 *
+	 * @var string
+	 */
 	protected $includeFolders = '';
 
 	/**
-	 * The exclude.
+	 * Setting to exclude specific files or folders.
 	 *
 	 * @var    string
 	 * @since  3.2
 	 */
 	protected $exclude = '';
 
+	/**
+	 * Regex pattern for exclusion of files.
+	 *
+	 * @var string
+	 */
 	protected $excludeFiles = '';
 
+	/**
+	 * Regex pattern for exclusion of files.
+	 *
+	 * @var string
+	 */
 	protected $excludeFolders = '';
 
+	/**
+	 * List of files and/or folders to ignore irrespective of
+	 * the in- and exclusion settings above.
+	 *
+	 * @var string[]
+	 */
 	protected $ignore
 		= [
 			'CVS',
@@ -68,47 +96,51 @@ class FilePickerField extends FormField
 		];
 
 	/**
-	 * The recursive.
-	 *
-	 * @var    string
-	 * @since  3.6
-	 */
-	protected $recursive = false;
-
-	/**
-	 * The hideNone.
-	 *
-	 * @var    boolean
-	 * @since  3.2
-	 */
-	protected $hideNone = false;
-
-	/**
-	 * The hideDefault.
-	 *
-	 * @var    boolean
-	 * @since  3.2
-	 */
-	protected $hideDefault = false;
-
-	/**
-	 * The directory.
+	 * Base directory for navigation.
 	 *
 	 * @var    string
 	 * @since  3.2
 	 */
 	protected $directory = '/';
 
+	/**
+	 * Allow selection of files, folders or both.
+	 *
+	 * @var string
+	 */
 	protected $mode = ScannerConfig::MODE_FILES;
 
+	/**
+	 * Selection of UI/UX style.
+	 *
+	 * @var string
+	 */
 	protected $style = 'default';
 
+	/**
+	 * Display and allow selection of hidden files and/or folders.
+	 *
+	 * @var bool
+	 */
 	protected $showHidden = false;
 
+	/**
+	 * Allow selection of multiple files and/or folders.
+	 *
+	 * @var
+	 */
 	protected $multiple;
 
+	/**
+	 * Disallow non logged in usage.
+	 *
+	 * @var
+	 */
 	protected $secure;
 
+	/**
+	 * @param   null  $form
+	 */
 	public function __construct($form = null)
 	{
 		parent::__construct($form);
@@ -120,12 +152,9 @@ class FilePickerField extends FormField
 	}
 
 	/**
-	 * Method to get the field input markup for a generic list.
-	 * Use the multiple attribute to enable multiselect.
+	 * Method to get the field input markup.
 	 *
 	 * @return  string  The field input markup.
-	 *
-	 * @since   3.7.0
 	 */
 	protected function getInput(): string
 	{
@@ -138,7 +167,6 @@ class FilePickerField extends FormField
 			'config'    => [
 				'baseDir'        => $this->directory,
 				'multiple'       => $this->multiple,
-				'recursive'      => $this->recursive,
 				'mode'           => $this->mode,
 				'showHidden'     => $this->showHidden,
 				'include'        => $this->include,
@@ -159,14 +187,17 @@ class FilePickerField extends FormField
 
 		$this->initView($displayData);
 
-		$html = (new FileLayout('obix.form.field.filepicker'))->render(
+		$html = (new FileLayout('obix.filepicker.form.field.filepicker'))->render(
 			$displayData
 		);
 
 		return $html;
 	}
 
-	protected function initView(array $displayData)
+	/**
+	 * @param   array  $displayData
+	 */
+	protected function initView(array $displayData): void
 	{
 		$languageStrings = [
 			'PLG_FIELD_FILEPICKER_SELECT',
@@ -191,8 +222,6 @@ class FilePickerField extends FormField
 	 * @param   string  $name  The property name for which to get the value.
 	 *
 	 * @return  mixed  The property value or null.
-	 *
-	 * @since   3.2
 	 */
 	public function __get($name)
 	{
@@ -201,7 +230,6 @@ class FilePickerField extends FormField
 		case 'include':
 		case 'exclude':
 		case 'ignore':
-		case 'recursive':
 		case 'hideNone':
 		case 'hideDefault':
 		case 'directory':
@@ -225,10 +253,8 @@ class FilePickerField extends FormField
 	 * @param   mixed   $value  The value of the property.
 	 *
 	 * @return  void
-	 *
-	 * @since   3.2
 	 */
-	public function __set($name, $value)
+	public function __set($name, $value): void
 	{
 		switch ($name)
 		{
@@ -251,7 +277,6 @@ class FilePickerField extends FormField
 
 		case 'hideNone':
 		case 'hideDefault':
-		case 'recursive':
 		case 'showHidden':
 		case 'multiple':
 		case 'secure':
@@ -282,9 +307,8 @@ class FilePickerField extends FormField
 	 * @return  boolean  True on success.
 	 *
 	 * @see     JFormField::setup()
-	 * @since   3.2
 	 */
-	public function setup(\SimpleXMLElement $element, $value, $group = null)
+	public function setup(\SimpleXMLElement $element, $value, $group = null): bool
 	{
 		$value = empty($value)
 			? []
@@ -308,17 +332,12 @@ class FilePickerField extends FormField
 			{
 				$this->ignore = explode(',', $ignore);
 			}
-			$this->hideNone    = $this->parBool('hide_none', 'hideNone');
-			$this->hideDefault = $this->parBool(
-				'hide_default', 'hideDefault'
-			);
 			$this->directory   = (string) $this->element['directory'];
 			$this->mode        = ScannerConfig::modeId(
 				(string) $this->element['mode']
 			);
 			$this->style       = (string) $this->element['style'] ?: 'default';
 			$this->showHidden  = $this->parBool('showHidden', 'showHidden');
-			$this->recursive   = $this->parBool('recursive', 'recursive');
 			$this->multiple    = $this->parBool('multiple', 'multiple');
 			$this->secure      = $this->parBool('secure', 'secure');
 		}
@@ -326,7 +345,15 @@ class FilePickerField extends FormField
 		return $return;
 	}
 
-	private function parBool(string $elementName, string $optionalValue = '')
+	/**
+	 * Method to parse a boolean parameter value.
+	 *
+	 * @param   string  $elementName
+	 * @param   string  $optionalValue
+	 *
+	 * @return bool
+	 */
+	private function parBool(string $elementName, string $optionalValue = ''): bool
 	{
 		$value = (string) $this->element[$elementName];
 
