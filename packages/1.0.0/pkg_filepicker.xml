@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" method="upgrade">
+    <name>Filepicker Package</name>
+    <packagename>filepicker</packagename>
+    <creationDate>2021-06-08</creationDate>
+    <author>Pieter-Jan de Vries/Obix webtechniek</author>
+    <authorEmail>pieter@obix.nl</authorEmail>
+    <authorUrl>https://www.obix.nl</authorUrl>
+    <copyright>(C) Obix webtechniek</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <version>1.0.0</version>
+    <blockChildUninstall>true</blockChildUninstall>
+    <description>Obix File &amp; Folder Picker Form field and Custom field plugin and accompanying required files.</description>
+
+    <files>
+        <file type="plugin" id="filepicker" group="fields">plg_fields_filepicker.zip</file>
+        <file type="file" id="filepicker_files">plg_fields_filepicker_files.zip</file>
+        <file type="library" id="filepicker_library">plg_fields_filepicker_library.zip</file>
+        <file type="library" id="lib_obix">lib_obix.zip</file>
+    </files>
+</extension>
