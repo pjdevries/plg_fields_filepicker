@@ -2,6 +2,7 @@
 vendor
 tmp
 packages
+!pkg_filepicker*.xml
 *.min.js
 *.min.css
 *.zip
