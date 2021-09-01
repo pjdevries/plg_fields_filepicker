@@ -14,8 +14,8 @@
 
     <files>
         <file type="plugin" id="filepicker" group="fields">plg_fields_filepicker.zip</file>
-        <file type="file" id="filepicker_files">plg_fields_filepicker_files.zip</file>
-        <file type="library" id="filepicker_library">plg_fields_filepicker_library.zip</file>
-        <file type="library" id="lib_obix">lib_obix.zip</file>
+        <file type="file" id="filepicker_files">filepicker_files.zip</file>
+        <file type="library" id="Obix/Filepicker">filepicker_library.zip</file>
+        <file type="library" id="Obix">lib_obix.zip</file>
     </files>
 </extension>

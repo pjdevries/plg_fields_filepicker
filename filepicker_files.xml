@@ -11,8 +11,8 @@
     <description>Required files for Obix File &amp; Folder Picker Form field and Custom field plugin.</description>
 
     <fileset>
-        <files folder="layouts/obix/filepicker/form/field" target="layouts/obix/filepicker/form/field">
-            <file>filepicker.php</file>
+        <files folder="layouts/obix" target="layouts/obix">
+            <folder>filepicker.php</folder>
         </files>
 
         <files folder="layouts/obix/filepicker/form/field/filepicker" target="layouts/obix/filepicker/form/field/filepicker">
