@@ -7,7 +7,7 @@
 <!-- https://www.obix.nl-->
 <form>
     <fields name="fieldparams">
-        <fieldset name="fieldparams">
+        <fieldset name="fieldparams" addfieldpath="/libraries/Obix/FilePicker/Form/Field">
             <field name="baseDir"
                    type="filepicker"
                    label="PLG_FIELDS_FILEPICKER_BASE_DIR_LABEL"

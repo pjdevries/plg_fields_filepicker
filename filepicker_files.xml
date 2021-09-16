@@ -12,14 +12,7 @@
 
     <fileset>
         <files folder="layouts/obix" target="layouts/obix">
-            <folder>filepicker.php</folder>
-        </files>
-
-        <files folder="layouts/obix/filepicker/form/field/filepicker" target="layouts/obix/filepicker/form/field/filepicker">
-            <file>bottom.php</file>
-            <file>entries_alternate.php</file>
-            <file>entries_default.php</file>
-            <file>top.php</file>
+            <folder>filepicker</folder>
         </files>
     </fileset>
 </extension>
